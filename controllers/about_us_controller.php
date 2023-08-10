@@ -1,5 +1,7 @@
 <?php 
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $PATH = '../ultis/';
 $_SESSION['content'] = "";
 $file = fopen($PATH . "about_us.txt", "r");

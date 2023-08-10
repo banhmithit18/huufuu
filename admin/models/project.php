@@ -24,6 +24,14 @@ class project
     public function SetImageId($image_id){
      $this->image_id = $image_id;
     }
+
+    public $background_image_id;
+    public function GetBackgroundImageId(){
+     return $this->image_id;
+    }
+    public function SetBackgroundImageId($image_id){
+     $this->image_id = $image_id;
+    }
     
     public $project_status;
     public function GetProjectStatus(){

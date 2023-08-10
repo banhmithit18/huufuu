@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     columns: [
       { data: null },
       { data: "service_name" },
+      { data: "service_price" },
       { data: "service_priority" },
       {
         data: "service_id",
@@ -405,6 +406,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var category_id = $("#category_id").find(":selected").val();
     var service_image = getFiles($("#service_image")[0]);
     var service_priority = $("#service_priority").val();
+    var service_price = $("#service_price").val();
+
     var service_status = 0;
     if ($("#service_status").is(":checked")) {
       service_status = 1;
@@ -444,6 +447,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     formData.append("service_description", service_description);
     formData.append("category_id", category_id);
     formData.append("service_status", service_status);
+    formData.append("service_price",service_price);
     formData.append("function", "add_service");
     formData.append("service_priority", service_priority);
     formData.append("service_detail", JSON.stringify(service_detail));
@@ -491,6 +495,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           $("#service_name").val("");
           $("#service_description").val("");
           $("#service_image").val("");
+          $('#service_price').val("");
           //disable button
           $("#service_priority").val("1");
           $("#service_detail_count").val("0");
@@ -526,6 +531,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           $("#service_description").val("");
           $("#service_image").val(null);
           $("#service_priority").val("1");
+          $('#service_price').val("");
           $("#service_detail_count").val("0");
           $("#detail").empty();
           $("#btn_preview_image").attr("disabled", true);
@@ -570,6 +576,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       $("#service_name_edit").val(data.service_name);
       $("#service_description_edit").val(data.service_description);
       $("#service_priority_edit").val(data.service_priority);
+      $('#service_price_edit').val(data.service_price);
       if (data.service_status == "0") {
         $("#edit_service_status").prop("checked", false);
       } else {
@@ -986,6 +993,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var service_description = $("#service_description_edit").val();
     var service_priority = $("#service_priority_edit").val();
     var category_id = $("#category_id_edit").find(":selected").val();
+    var service_price = $('#service_price_edit').val();
     var service_status = 0;
     if ($("#service_status_edit").is(":checked")) {
       service_status = 1;
@@ -1018,6 +1026,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         service_priority: service_priority,
         category_id: category_id,
         service_status: service_status,
+        service_price: service_price,
         function: "save_service_edit",
       },
       success: function (data) {

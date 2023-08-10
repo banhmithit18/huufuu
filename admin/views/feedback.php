@@ -13,6 +13,10 @@
                         <label for="name">Name</label>
                         <input class="form-control" id="feedback_name" type="text" placeholder="Enter feedback name" required>
                     </div>
+                    <div class="col">
+                        <label for="name">Priority</label>
+                        <input class="form-control" value=" 1" id="feedback_priority" type="number" placeholder="Enter feedback priority" >
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -67,6 +71,7 @@
                     <tr>
                         <th>Index</th>
                         <th>Name</th>
+                        <th>Priority</th>
                         <th>Image</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -183,6 +188,10 @@
                                 <label for="name">Name</label>
                                 <input class="form-control" id="feedback_name_edit" type="text" placeholder="Enter feedback name" required>
                             </div>
+                            <div class="col">
+                        <label for="name">Priority</label>
+                        <input class="form-control" id="feedback_priority_edit" type="number" placeholder="Enter feedback priority" >
+                    </div>
                         </div>
                         <div class="row">
                             <div class="col">

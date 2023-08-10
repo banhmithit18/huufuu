@@ -73,10 +73,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 return 'Instargarm';
               }
               else if (data == "3") {
-                return 'Pinterest';
+                return 'Linkedin';
               }
               else if (data == "4") {
-                return 'Quote';
+                return 'Footer introduce ';
               }
             },
           },

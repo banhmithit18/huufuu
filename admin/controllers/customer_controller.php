@@ -19,22 +19,7 @@ if ($function == "get_customer") {
     die();
 }
 
-//function check customername exist or not
-function CheckExist($value, $type)
-{
-    $db = new DBConnection();
-    if ($type == "email") {
-        $sql = "SELECT * FROM customer WHERE customer_email = '$value'";
-    } else if ($type == "phone") {
-        $sql = "SELECT * FROM customer WHERE customer_phone = '$value'";
-    }
-    $result = $db->Retrive($sql);
-    if ($result == "") {
-        return false;
-    } else {
-        return true;
-    }
-}
+
 
 //function delete customer from database
 if ($function == "delete_customer") {
@@ -69,16 +54,7 @@ if ($function == "add_customer") {
     $customer_age = $_POST['customer_age'] == null ? "" : $_POST['customer_age'];
     $customer_gender = $_POST['customer_gender'] == null ? 0 : $_POST['customer_gender'];
     $customer_name = $_POST['customer_name'] == null ? "" : $_POST['customer_name'];
-    if ($check_exist = CheckExist($customer_email, "email")) {
-        $return_message = (array('status' => '0', 'response' => 'Email already exist', 'error' => 'Email already exist'));
-        echo json_encode($return_message);
-        die();
-    }
-    if ($check_exist = CheckExist($customer_phone, "phone")) {
-        $return_message = (array('status' => '0', 'response' => 'Phone number already exist', 'error' => 'Phone number already exist'));
-        echo json_encode($return_message);
-        die();
-    }
+
     //create entity
     $customer->SetCustomerAddress($customer_address);
     $customer->SetCustomerAge($customer_age);
@@ -129,25 +105,6 @@ if ($function == "update_customer") {
     $customer->SetCustomerName($customer_name);
     $customer->SetCustomerPhone($customer_phone);
 
-    //create ent old customer\
-    $db = new DBConnection();
-    $result  = $db->Retrive("SELECT * FROM customer WHERE customer_id = $customer_id");
-
-    if ($result[0]['customer_email'] != $customer_email) {
-        $check_exist = CheckExist($customer_email, "email");
-        if ($check_exist) {
-            $return_message = (array('status' => '0', 'response' => 'Email already exist', 'error' => 'Email already exist'));
-            echo json_encode($return_message);
-            die();
-        }
-    } else if ($result[0]['customer_phone'] != $customer_phone) {
-        $check_exist = CheckExist($customer_phone, "phone");
-        if ($check_exist) {
-            $return_message = (array('status' => '0', 'response' => 'Phone number already exist', 'error' => 'Phone number already exist'));
-            echo json_encode($return_message);
-            die();
-        }
-    }
     //update
     $db = new DBConnection();;
     if ($db->Update($customer, $customer_id)) {

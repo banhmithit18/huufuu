@@ -11,13 +11,13 @@ if (isset($_REQUEST['function'])) {
 }
 if($function == "get_contact"){
     $db = new DBConnection();
-    $sql = "SELECT service.service_id, service.service_name, 
+    $sql = "SELECT service.service_id, IFNULL(service.service_name, '') AS service_name, 
     customer.customer_id,customer.customer_name,customer.customer_email, customer.customer_phone,
-    contact_us_id, contact_us_messenger, contact_us_status, contact_us_created_time
+    contact_us_id, contact_us_message, contact_us_status, contact_us_created_time
     FROM `contact_us` 
-    join `service` on service.service_id = contact_us.service_id
-    join customer on contact_us.customer_id = customer.customer_id
-    order by contact_us_status";
+    LEFT JOIN `service` ON service.service_id = contact_us.service_id
+    JOIN customer ON contact_us.customer_id = customer.customer_id
+    ORDER BY contact_us_status";
     $result = $db->Retrive($sql);
     echo json_encode($result);
     die();

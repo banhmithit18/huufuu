@@ -1,13 +1,11 @@
 <?php
+require_once("../admin/models/about_us.php");
+require_once("../admin/models/user.php");
 class DBConnection {
-private $servername = "localhost:3306";
-private $username = "macylantern";
-private $password = "677*Inh1t";
-private $database = "macylantern";
-// private $servername = "localhost";
-// private $username = "root";
-// private $password = "";
-// private $database = "macy_lantern";
+private $servername = "localhost";
+private $username = "root";
+private $password = "";
+private $database = "huufuu";
 public function __construct()
 {
     
@@ -16,8 +14,6 @@ public function __construct()
 //connect database
 public function Connect(){
     $conn = new mysqli($this->servername,$this->username,$this->password,$this->database);
-    $conn->set_charset("utf8");
-
     if(mysqli_connect_error())
     {
         die("Connection failed: " . mysqli_connect_error());
@@ -121,7 +117,11 @@ public function GetLastId($class_name){
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $conn->close();
-    return $row[$class_name.'_id'];
+    if(is_null($row)){
+        return "0";
+    }else{
+        return $row[$class_name.'_id'];
+    }
 }
 
 //function retrive data from statement  
@@ -164,7 +164,7 @@ public function Delete($item)
     //get field properties
     $id_name = $class_name . "_id";
     $id = $item->$id_name;
-    $sql = "DELETE FROM $class_name WHERE $id_name = ?";
+    $sql = "DELETE FROM `$class_name` WHERE $id_name = ?";
     $conn = $this->connect();
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i",$id);

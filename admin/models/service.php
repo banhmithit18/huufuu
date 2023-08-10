@@ -41,6 +41,14 @@ public function SetServiceStatus($service_status){
  $this->service_status = $service_status;
 }
 
+public $service_price;
+public function GetServicePrice(){
+ return $this->service_status;
+}
+public function SetServicePrice($service_status){
+ $this->service_status = $service_status;
+}
+
 public function __construct()
 {
 

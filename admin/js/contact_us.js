@@ -15,16 +15,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
       {
         data: "service_name",
         render: function (data, type, row, meta) {
-          return (
-            "<a target='_blank' href='../../service-detail.php?id=" +
-            row.service_id +
-            "'>" +
-            data +
-            "</a>"
-          );
+          if (data != "") {
+            return (
+
+              data 
+
+            );
+          }else{
+            return ""
+          }
         },
       },
-      { data: "contact_us_messenger" },
+      { data: "contact_us_message" },
       {
         data: "contact_us_created_time",
         render: function (data, type, row, meta) {
@@ -88,46 +90,46 @@ window.addEventListener("DOMContentLoaded", (event) => {
           btnClass: "btn-blue",
           action: function () {
             $.ajax({
-                url: "../controllers/contact_us_controller.php",
-                type: "POST",
-                data: {
-                    function: "handle_contact",
-                    contact_us_id: contact_us_id,
-                },
-                success: function (data) {
-                    try{
-                        data = $.parseJSON(data);
-                        if (data.status == "1") {
-                            $.alert({
-                              title: "Success!",
-                              type: "green",
-                              typeAnimated: true,
-                              content: "Contact has been handled!",
-                            });
-                            //reload table
-                            var t = $("#table_contact_us").DataTable();
-                            t.ajax.reload();
-                          } else {
-                            $.alert({
-                              title: "Error",
-                              type: "red",
-                              typeAnimated: true,
-                              content: "Cannot handle this contact, error: " + data.error,
-                            });
-                          }
-                    }
-                    catch(e)
-                    {
-                        $.alert
-                        ({
-                            title: "Error",
-                            type: "red",
-                            typeAnimated: true,
-                            content: "Something went wrong! Reason: " + e,
-                        });
-                        return;
-                    }
-                }})
+              url: "../controllers/contact_us_controller.php",
+              type: "POST",
+              data: {
+                function: "handle_contact",
+                contact_us_id: contact_us_id,
+              },
+              success: function (data) {
+                try {
+                  data = $.parseJSON(data);
+                  if (data.status == "1") {
+                    $.alert({
+                      title: "Success!",
+                      type: "green",
+                      typeAnimated: true,
+                      content: "Contact has been handled!",
+                    });
+                    //reload table
+                    var t = $("#table_contact_us").DataTable();
+                    t.ajax.reload();
+                  } else {
+                    $.alert({
+                      title: "Error",
+                      type: "red",
+                      typeAnimated: true,
+                      content: "Cannot handle this contact, error: " + data.error,
+                    });
+                  }
+                }
+                catch (e) {
+                  $.alert
+                    ({
+                      title: "Error",
+                      type: "red",
+                      typeAnimated: true,
+                      content: "Something went wrong! Reason: " + e,
+                    });
+                  return;
+                }
+              }
+            })
           },
         },
         cancel: {

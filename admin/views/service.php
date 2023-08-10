@@ -32,6 +32,11 @@
                         <input type="number" class="form-control" id="service_priority" placeholder="Enter priority" value="1" pattern="[0-9]+" required>
                         <div class="invalid-feedback">Please enter number only</div>
                     </div>
+                    <div class="col-md-6">
+                        <label for="priority">price</label>
+                        <input type="text" class="form-control" id="service_price" placeholder="Enter price" required>
+                        <div class="invalid-feedback">Please enter price</div>
+                    </div>
                 </div>
                 <div class="row" style="padding-top:10px">
                     <div class="col-md-6">
@@ -44,7 +49,7 @@
                 <div class="row" style="padding-top:10px">
                     <div class="col-md-6">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="service_image" accept="image/*" multiple required>
+                            <input type="file" class="custom-file-input" id="service_image" accept="image/*" required>
                             <input type="hidden" id="service_image">
                             <label class="custom-file-label" id="label_image" for="customFile" name="files[]">Service Image</label>
                             <div><small>Note: Images will be sort by index, the first will be the service thumb image!</small></div>
@@ -65,7 +70,6 @@
                         <form id="service_detail">
                             <input type="hidden" id="service_detail_count" value="0">
                             <div id="detail">
-
                             </div>
                         </form>
                     </div>
@@ -93,6 +97,7 @@
                     <tr>
                         <th>Index</th>
                         <th>Name</th>
+                        <th>Price</th>
                         <th>Priority</th>
                         <th>Image</th>
                         <th>Detail</th>
@@ -139,7 +144,7 @@
                 </div>
                 <div class="modal-footer">
                     <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="service_image_edit" accept="image/*"></label>
-                    <label id="blog_image_edit_label" class="btn btn-secondary">Add image <input type="file" hidden id="service_image_add" accept="image/*" multiple></label>
+                    <!-- <label id="blog_image_edit_label" class="btn btn-secondary">Add image <input type="file" hidden id="service_image_add" accept="image/*" multiple></label> -->
 
                     <button type="button" id="btn_delete_image" class="btn btn-danger">Delete</button>
                     <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
@@ -149,8 +154,8 @@
         </div>
     </div>
 
- <!-- Modal -->
- <div class="modal fade" id="modal-service-image-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modal-service-image-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -182,9 +187,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btn_save_image_edit" class="btn btn-secondary">Save</button>
-                    <input type="file" hidden id="image_edit" accept="image/*" multiple>
+                    <input type="file" hidden id="image_edit" accept="image/*" >
                     <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="upload_image_edit" accept="image/*"></label>
-                    <label id="blog_image_edit_label" class="btn btn-secondary">Add image <input type="file" hidden id="add_image_edit" accept="image/*" multiple></label>
+                    <!-- <label id="blog_image_edit_label" class="btn btn-secondary">Add image <input type="file" hidden id="add_image_edit" accept="image/*" multiple></label> -->
 
                     <button type="button" id="btn_delete_image_edit" class="btn btn-danger">Delete</button>
                     <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
@@ -230,6 +235,11 @@
                                 <input type="number" class="form-control" id="service_priority_edit" placeholder="Enter priority" value="1" pattern="[0-9]+" required>
                                 <div class="invalid-feedback">Please enter number only</div>
                             </div>
+                            <div class="col-md-6">
+                                <label for="priority">price</label>
+                                <input type="text" class="form-control" id="service_price_edit" placeholder="Enter price" required>
+                                <div class="invalid-feedback">Please enter price</div>
+                            </div>
                         </div>
                         <div class="row" style="padding-top:10px">
                             <div class="col-md-6">
@@ -258,15 +268,15 @@
                     <button type="button" class="close btn-transparent" data-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
-                </div>                        
+                </div>
                 <div class="modal-body ">
                     <button id="add_input_edit" type="button" style="border:none;background-color:transparent"><i class="bi bi-plus-square-fill"></i></button>
-                    <button id="delete_input_edit" type="button" style="border:none;background-color:transparent"><i class="bi bi-dash-square-fill"></i></button>                  
+                    <button id="delete_input_edit" type="button" style="border:none;background-color:transparent"><i class="bi bi-dash-square-fill"></i></button>
                     <input type="hidden" class="form-control" id="service_id">
                     <form style="padding-bottom:20px" id="form_service_edit" action="javascript:void(0);">
                         <input type="hidden" id="service_detail_count_edit" value="0">
-                            <div id="detail_edit">
-                            </div>
+                        <div id="detail_edit">
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btn_save_detail" class="btn btn-secondary">Save</button>

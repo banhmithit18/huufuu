@@ -12017,3 +12017,7 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+.carousel-inner > .item > img {
+  width:400px;
+  height:400px;
+}

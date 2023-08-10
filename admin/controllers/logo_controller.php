@@ -30,7 +30,7 @@ function UploadImage($imgae, $logo_id)
     $file_error = $file['error'];
     $file_ext = explode('.', $file_name);
     $file_ext = strtolower(end($file_ext));
-    $allowed = array('jpg', 'jpeg', 'png');
+    $allowed = array('jpg', 'jpeg', 'png','svg');
     if (in_array($file_ext, $allowed)) {
         if ($file_error === 0) {
             //genarate time stamp with logo id

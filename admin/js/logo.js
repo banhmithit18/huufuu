@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var fileName = $(this).val().replace(/\\/g, "/").replace(/.*\//, "");
     //check if extension is valid
     var fileExt = fileName.split(".").pop();
-    if (fileExt == "jpg" || fileExt == "png" || fileExt == "jpeg") {
+    if (fileExt == "jpg" || fileExt == "png" || fileExt == "jpeg" || fileExt == "svg") {
     } else {
       //alert form invalid
       $.alert({
@@ -160,6 +160,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
       rowId: "logo_id",
       columns: [
         { data: null },
+        { data: "logo_location",
+          render: function(data,type,row){
+            if("1" == data){
+              return "Header";
+            }
+            if("2" == data){
+              return "Footer"
+            }
+          }
+        },
         {
             data: "image_path",
             className: "dt-body-center",

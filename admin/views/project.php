@@ -34,7 +34,8 @@
                             <input type="file" class="custom-file-input" id="project_image" accept="image/*" required>
                             <input type="hidden" id="project_image">
                             <label class="custom-file-label" id="label_image" for="customFile" name="files">Project Image</label>
-                            <div class="invalid-project">Please add project image.</div>
+                            <div class="invalid-feedback">Please add project image.</div>
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -43,7 +44,20 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row" style="padding-top:10px">
+                    <div class="col-md-6">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="project_background_image" accept="image/*">
+                            <label class="custom-file-label" id="label_image" for="customFile" name="files">Background Project Image</label>
+                            <div><small>Note: if not input, black background will be shown</small></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <button class="btn btn-secondary" type="button" id="btn-preview-background-image" style="width:140px; height:40px;" data-toggle="modal" data-target="#modal-project_background-image" disabled>View Image</button>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="row pt-5" style="padding-bottom:10px">
@@ -68,6 +82,7 @@
                         <th>Index</th>
                         <th>Name</th>
                         <th>Image</th>
+                        <th>Image background</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -116,6 +131,66 @@
                     <button style="display:none" type="button" id="btn_delete_image" class="btn btn-danger">Delete</button>
                     <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-project_background-image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Image </h5>
+                    <button type="button" class="close btn-transparent" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <input type="hidden" class="form-control" id="project_id">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                            <img style="width:400px;height:400px" class=" mx-auto d-block" src="" alt="" id="background-image-preview" onerror="this.style.display='none'"> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_delete_background_image" class="btn btn-secondary">Delete</button>
+                    <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-project_background-image-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Image </h5>
+                    <button type="button" class="close btn-transparent" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <input type="hidden" class="form-control" id="project_id">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <img style="width:400px;height:400px" class="mx-auto d-block" src="" id="background-image-preview-edit" alt=""> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                <button type="button" id="btn_save_background_image_edit" class="btn btn-secondary">Save</button>
+                <button type="button" id="btn_delete_background_image_edit" class="btn btn-secondary">Delete</button>
+                <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="upload_background_image_edit" accept="image/*"></label>
+                <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
                 </div>
             </div>
         </div>
@@ -189,8 +264,10 @@
                                 <label for="content">Content</label>
                                 <textarea class="form-control" id="project_content_edit" rows="2" placeholder="Enter contnet"></textarea>
                             </div>
-                        </div>feedback
+                        </div>
                         <input type="hidden" id="image_id">
+                        <input type="hidden" id="background_image_id">
+
                         <div class="row" style="padding-top:10px">
                             <div class="col-md-6">
                                 <div class="form-check">

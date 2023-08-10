@@ -43,15 +43,7 @@ class contact_us
         $this->service_id = $service_id;
     }
 
-    public $contact_us_created_time;
-    public function GetContactUsCreatedTime()
-    {
-        return $this->contact_us_created_time;
-    }
-    public function SetContactUsCreatedTime($contact_us_created_time)
-    {
-        $this->contact_us_created_time = $contact_us_created_time;
-    }
+ 
 
     public function __construct()
     {

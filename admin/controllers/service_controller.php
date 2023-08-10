@@ -44,18 +44,21 @@ if ($function == "save_service_edit") {
     $service_priority = $_REQUEST['service_priority'] == "" ? 0 : $_REQUEST['service_priority'];
     $category_id = $_REQUEST['category_id'] == "" ? 0 : $_REQUEST['category_id'];
     $service_status = $_REQUEST['service_status'] == "" ? 0 : $_REQUEST['service_status'];
+    $service_price = $_REQUEST['service_price'] == "" ? 0 : $_REQUEST['service_price'];
+
 
     $service = new service();
     $service->service_name = $service_name;
     $service->service_description = $service_description;
     $service->service_priority = $service_priority;
     $service->category_id = $category_id;
-    $service->service_status = $service_status;
+    $service->service_status = $service_status == "1" ? 1 : false;
+    $service->service_price = $service_price;
 
     $db = new DBConnection();
     if ($db->Update($service, $service_id)) {
         WriteLog("Update service", "Upadate service with id: $service_id");
-        echo json_encode(array("status" => "1", "response" => "Service has not been updated successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Service has been updated successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Service has not been updated successfully", "error" => "Cannot update service, please try again !"));
     }
@@ -70,7 +73,7 @@ if ($function == "delete_service") {
 
     if ($db->Delete($service)) {
         WriteLog("Delete service", "Delete service with id: $service_id");
-        echo json_encode(array("status" => "1", "response" => "Service has not been deleted successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Service has been deleted successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Service has not been deleted successfully", "error" => "Cannot delete service, please check if service has been used !"));
     }
@@ -180,6 +183,7 @@ if ($function == "add_service") {
     $service_priority = $_POST['service_priority'] == null ? 999 : $_POST['service_priority'];
     $category_id = $_POST['category_id'] == null ? 0 : $_POST['category_id'];
     $service_status = $_POST['service_status'] == null ? 0 : $_POST['service_status'];
+    $service_price = $_POST['service_price'] == null ? "" : $_POST['service_price'];
     $service_detail = $_POST['service_detail'] == null ? "" : $_POST['service_detail'];
     $service_description = $_POST['service_description'] == null ? "" : $_POST['service_description'];
     $service_image_count = $_POST['service_image_count'] == null ? 0 : $_POST['service_image_count'];
@@ -189,6 +193,7 @@ if ($function == "add_service") {
     $service->service_priority = $service_priority;
     $service->category_id = $category_id;
     $service->service_status = $service_status;
+    $service->service_price = $service_price;
     $service->service_description = $service_description;
     $db = new DBConnection();
     if ($db->Create($service)) {

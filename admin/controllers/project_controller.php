@@ -1,4 +1,7 @@
 <?php
+define("IMAGE_WIDTH", 400);
+define("IMAGE_HEIGHT", 400);
+
 session_start();
 require_once('../ultis/DBConnection.php');
 require_once('../models/log.php');
@@ -28,12 +31,26 @@ if ($function == "get_image") {
     echo json_encode($result);
 }
 
+if ($function == "get_background_image") {
+    $project_id = $_REQUEST['project_id'] == "" ? 0 : $_REQUEST['project_id'];
+    $sql = "SELECT * FROM project JOIN image ON project.background_image_id = image.image_id WHERE project_id = $project_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
+}
+
 if ($function == "save_project_edit") {
     $project_id = $_REQUEST['project_id'] == "" ? 0 : $_REQUEST['project_id'];
     $project_name = $_REQUEST['project_name'] == "" ? "" : $_REQUEST['project_name'];
     $project_content = $_REQUEST['project_content'] == "" ? "" : $_REQUEST['project_content'];
     $project_status = $_REQUEST['project_status'] == "" ? 0 : $_REQUEST['project_status'];
-    $image_id = $_REQUEST['image_id'] == "" ? 0 : $_REQUEST['image_id'];
+    $sql = "SELECT * FROM project WHERE project_id = $project_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+
+    $image_id = $result[0]['image_id'] == "" ? null : $result[0]['image_id'];
+    $background_image_id = $result[0]['background_image_id'] == "" ? null : $result[0]['background_image_id'];
+
 
     //get old project
     $project = new project();
@@ -41,11 +58,13 @@ if ($function == "save_project_edit") {
     $project->project_content = $project_content;
     $project->project_status = $project_status;
     $project->image_id = $image_id;
+    $project->background_image_id = $background_image_id;
+
 
     $db = new DBConnection();
     if ($db->Update($project, $project_id)) {
         WriteLog("Update project", "Upadate project with id: $project_id");
-        echo json_encode(array("status" => "1", "response" => "Project has not been updated successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Project has been updated successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Project has not been updated successfully", "error" => "Cannot update project, please try again !"));
     }
@@ -65,7 +84,54 @@ if ($function == "delete_project") {
     }
 }
 
+if ($function == "save_background_image_edit") {
+    $project_id = $_REQUEST['project_id'] == "" ? 0 : $_REQUEST['project_id'];
+    $sql = "SELECT * FROM project WHERE project_id = $project_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    $image_id = 0;
+    //get project
+    $project = new project();
+    $project->project_name = $result[0]['project_name'];
+    $project->project_content = $result[0]['project_content'];
+    $project->project_status = $result[0]['project_status'];
+    $project->image_id = $result[0]['image_id'];
 
+
+
+    //upload file to sv
+    $file = null;
+    if (isset($_FILES['project_background_image'])) {
+        $file = $_FILES['project_background_image'];
+    }
+    if ($file != null) {
+        $return = UploadImage($file, $project_id);
+        if ($return['status'] == "1") {
+            $image_id = $return['image_id'];
+            //set image id to updated one
+            $project->background_image_id = $image_id;
+            //update project
+            if ($db->Update($project, $project_id)) {
+                WriteLog("Update project", "Change project image with id: $project_id");
+                echo json_encode(array("status" => "1", "response" => "Project has been updated successfully", "error" => ""));
+            } else {
+                echo json_encode(array("status" => "0", "response" => "Project has not been updated successfully", "error" => "Cannot update project, please try again !"));
+            }
+        } else {
+            echo json_encode(array("status" => "0", "response" => "Image has not been uploaded successfully", "error" => $return['error']));
+            die();
+        }
+    } else {
+        //remove current 
+        $project->background_image_id = null;
+        if ($db->Update($project, $project_id)) {
+            WriteLog("Update project", "Remove project image with id: $project_id");
+            echo json_encode(array("status" => "1", "response" => "Project has been updated successfully", "error" => ""));
+        } else {
+            echo json_encode(array("status" => "0", "response" => "Project has not been updated successfully", "error" => "Cannot update project, please try again !"));
+        }
+    }
+}
 
 
 if ($function == "save_image_edit") {
@@ -79,6 +145,7 @@ if ($function == "save_image_edit") {
     $project->project_name = $result[0]['project_name'];
     $project->project_content = $result[0]['project_content'];
     $project->project_status = $result[0]['project_status'];
+    $project->background_image_id = $result[0]['background_image_id'];
 
     //upload file to sv
     $file = $_FILES['project_image_0'];
@@ -96,7 +163,7 @@ if ($function == "save_image_edit") {
     //update project
     if ($db->Update($project, $project_id)) {
         WriteLog("Update project", "Change project image with id: $project_id");
-        echo json_encode(array("status" => "1", "response" => "Project has not been updated successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Project has been updated successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Project has not been updated successfully", "error" => "Cannot update project, please try again !"));
     }
@@ -109,6 +176,7 @@ if ($function == "add_project") {
     $project_content = $_POST['project_content'] == null ? 0 : $_POST['project_content'];
     $project_status = $_POST['project_status'] == null ? 0 : $_POST['project_status'];
     $image_id = 0;
+    $background_image_id = null;
 
     //create project ent
     $project = new project();
@@ -120,10 +188,19 @@ if ($function == "add_project") {
     $lastId =  $db->GetLastId("project") + 1;
     //add image then get inserted id 
     $file = $_FILES['project_image_0'];
+    //get background image_id 
+    $file_background = $_FILES['project_background_image'];
+
     if ($file != null) {
         $return = UploadImage($file, $lastId, true);
         if ($return['status'] == "1") {
             $image_id =  $return['image_id'];
+            if ($file_background == null) {
+                $project->background_image_id = null;
+            } else {
+                $return_background = UploadImage($file_background, $lastId, true);
+                $project->background_image_id = $return_background['image_id'];
+            }
             //create project
             $project->image_id = $image_id;
 
@@ -143,7 +220,7 @@ if ($function == "add_project") {
             echo json_encode(array("status" => "0", "response" => "Image has not been uploaded successfully", "error" => $return['error']));
             die();
         }
-    }else{
+    } else {
         ob_end_clean();
         echo json_encode(array("status" => "0", "response" => "Could not find image file", "error" => $e->getMessage()));
     }
@@ -167,6 +244,11 @@ function UploadImage($imgae, $project_id)
             $file_destination = $image_path . $file_name_new;
             move_uploaded_file($file_tmp, $file_destination);
             $path = $file_destination;
+            //resize image
+            $resize_result = resize_image($path, IMAGE_WIDTH, IMAGE_HEIGHT,true);
+            if("Success" != $resize_result){
+                return array("image_id" => "", "status" => "0", "error" => "not a valid image type");
+            }
 
             return array("image_id" => CreateImage($path), "status" => "1", "error" => "");
         } else {
@@ -200,4 +282,67 @@ function WriteLog($log_name, $log_detail)
     //create database object
     $db = new DBConnection();
     $db->Create($log);
+}
+
+function resize_image($file, $w, $h, $crop = FALSE)
+{
+    list($width, $height) = getimagesize($file);
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width - ($width * abs($r - $w / $h)));
+        } else {
+            $height = ceil($height - ($height * abs($r - $w / $h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w / $h > $r) {
+            $newwidth = $h * $r;
+            $newheight = $h;
+        } else {
+            $newheight = $w / $r;
+            $newwidth = $w;
+        }
+    }
+    $src = null;
+    switch (mime_content_type($file)) {
+        case 'image/png':
+            $src = imagecreatefrompng($file);
+            break;
+        case 'image/gif':
+            $src = imagecreatefromgif($file);
+            break;
+        case 'image/jpeg':
+            $src = imagecreatefromjpeg($file);
+            break;
+        case 'image/bmp':
+            $src = imagecreatefrombmp($file);
+            break;
+        default:
+            return "Error: File is not a valid image type";
+            break;
+    }
+
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    //save file to system
+    switch (mime_content_type($file)) {
+        case 'image/png':
+            imagepng($dst, $file);
+            break;
+        case 'image/gif':
+            imagegif($dst, $file);
+            break;
+        case 'image/jpeg':
+            imagejpeg($dst, $file);
+            break;
+        case 'image/bmp':
+            imagebmp($dst, $file);
+            break;
+        default:
+            return "Error: File is not a valid image type";
+            break;
+    }
+    return "Success";
 }

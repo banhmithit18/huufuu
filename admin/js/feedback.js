@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         columns: [
             { data: null },
             { data: "feedback_name" },
+            { data: "feedback_priority" },
             {
                 data: "feedback_id",
                 className: "dt-body-center",
@@ -285,6 +286,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         $("#form_feedback").addClass("was-validated");
         //get data
         var feedback_name = $("#feedback_name").val();
+        var feedback_priority = $("#feedback_priority").val();
         var feedback_content = $("#feedback_content").val();
         var feedback_image = getFiles($("#feedback_image")[0]);
         var feedback_status = 0;
@@ -304,6 +306,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var formData = new FormData();
         formData.append("feedback_name", feedback_name);
         formData.append("feedback_content", feedback_content);
+        formData.append("feedback_priority",feedback_priority);
         formData.append("feedback_status", feedback_status);
         formData.append("function", "add_feedback");
         var feedback_image_count = 0;
@@ -322,7 +325,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
             processData: false,
             success: function (data) {
                 try {
-                    console.log(data)
                     data = JSON.parse(data);
                     if (data.status == "1") {
                         //clear form
@@ -423,6 +425,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         if (id_split[0] == "edit") {
             $('#image_id').val(data.image_id);
             $("#feedback_name_edit").val(data.feedback_name);
+            $('#feedback_priority_edit').val(data.feedback_priority);
             $("#feedback_content_edit").val(data.feedback_content);
             if (data.feedback_status == "0") {
                 $("#edit_feedback_status").prop("checked", false);
@@ -775,6 +778,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var feedback_id = $("#feedback_id").val();
         var feedback_name = $("#feedback_name_edit").val();
         var feedback_content = $("#feedback_content_edit").val();
+        var feedback_priority = $('#feedback_priority_edit').val();
         var image_id = $('#image_id').val();
         var feedback_status = 0;
         if ($("#feedback_status_edit").is(":checked")) {
@@ -796,6 +800,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 feedback_id: feedback_id,
                 feedback_name: feedback_name,
                 feedback_content: feedback_content,
+                feedback_priority: feedback_priority,
                 image_id: image_id,
                 feedback_status: feedback_status,
                 function: "save_feedback_edit",

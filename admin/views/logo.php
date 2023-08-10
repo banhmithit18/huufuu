@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th>Index</th>
+                        <th>Type</th>
                         <th>Image</th>
                     </tr>
                 </thead>

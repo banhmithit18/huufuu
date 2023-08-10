@@ -34,18 +34,20 @@ if ($function == "save_feedback_edit") {
     $feedback_content = $_REQUEST['feedback_content'] == "" ? "" : $_REQUEST['feedback_content'];
     $feedback_status = $_REQUEST['feedback_status'] == "" ? 0 : $_REQUEST['feedback_status'];
     $image_id = $_REQUEST['image_id'] == "" ? 0 : $_REQUEST['image_id'];
+    $feedback_priority = $_REQUEST['feedback_priority'] == "" ? "" : $_REQUEST['feedback_priority'];
 
-    //get old feedback
+    
     $feedback = new feedback();
     $feedback->feedback_name = $feedback_name;
     $feedback->feedback_content = $feedback_content;
     $feedback->feedback_status = $feedback_status;
     $feedback->image_id = $image_id;
+    $feedback->feedback_priority = $feedback_priority;
 
     $db = new DBConnection();
     if ($db->Update($feedback, $feedback_id)) {
         WriteLog("Update feedback", "Upadate feedback with id: $feedback_id");
-        echo json_encode(array("status" => "1", "response" => "Feedback has not been updated successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Feedback has been updated successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Feedback has not been updated successfully", "error" => "Cannot update feedback, please try again !"));
     }
@@ -96,7 +98,7 @@ if ($function == "save_image_edit") {
     //update feedback
     if ($db->Update($feedback, $feedback_id)) {
         WriteLog("Update feedback", "Change feedback image with id: $feedback_id");
-        echo json_encode(array("status" => "1", "response" => "Feedback has not been updated successfully", "error" => ""));
+        echo json_encode(array("status" => "1", "response" => "Feedback has been updated successfully", "error" => ""));
     } else {
         echo json_encode(array("status" => "0", "response" => "Feedback has not been updated successfully", "error" => "Cannot update feedback, please try again !"));
     }
@@ -108,6 +110,7 @@ if ($function == "add_feedback") {
     $feedback_name = $_POST['feedback_name'] == null ? "" : $_POST['feedback_name'];
     $feedback_content = $_POST['feedback_content'] == null ? 0 : $_POST['feedback_content'];
     $feedback_status = $_POST['feedback_status'] == null ? 0 : $_POST['feedback_status'];
+    $feedback_priority = $_POST['feedback_priority'] == null ? 0 : $_POST['feedback_priority'];
     $image_id = 0;
 
     //create feedback ent
@@ -115,6 +118,7 @@ if ($function == "add_feedback") {
     $feedback->feedback_name = $feedback_name;
     $feedback->feedback_content = $feedback_content;
     $feedback->feedback_status = $feedback_status;
+    $feedback->feedback_priority = $feedback_priority;
     //get lastId feedback id
     $db = new DBConnection();
     $lastId =  $db->GetLastId("feedback") + 1;

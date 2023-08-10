@@ -21,6 +21,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 },
             },
             {
+                data: "project_id",
+                className: "dt-body-center",
+                render: function (data, type, row, meta) {
+                    return (
+                        "<button id=background_image_" +
+                        data +
+                        ' class="btn btn-sm btn-outline-success btn_edit">View</button>'
+                    );
+                },
+            },
+            {
                 data: "project_status",
                 className: "dt-body-center",
                 render: function (data, type, row) {
@@ -63,7 +74,38 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 t.cell(cell).invalidate("dom");
             });
     }).draw();
-    
+
+    //show image preview
+    $("#project_background_image").change(function () {
+        Array.from(this.files).map(function (f) {
+            {
+                if (!f.type.match("image.*")) {
+                    {
+                        $.alert({
+                            title: "Error",
+                            type: "red",
+                            typeAnimated: true,
+                            content: "Please upload image only",
+                        });
+                        return;
+                    }
+                }
+                flag = true;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#background-image-preview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(f);
+            }
+            //show image preview modal
+            if (flag == true) {
+                //enable button preview image
+                $("#btn-preview-background-image").removeAttr("disabled");
+                $("#modal-project_background-image").modal("show");
+            }
+        });
+    });
+
 
     //show image preview
     $("#project_image").change(function () {
@@ -96,7 +138,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                         e.target.result +
                         '" id="c-item_' +
                         f.name +
-                        '" width="450px" height="300px"></div>'
+                        '" width="400px" height="400px"></div>'
                     ).appendTo(".carousel-inner");
                     $(
                         '<li data-target="#carousel_image_project" data-slide-to="' +
@@ -149,7 +191,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                         e.target.result +
                         '" id="c-item_' +
                         f.name +
-                        '" width="450px" height="300px"></div>'
+                        '" width="400px" height="400px"></div>'
                     ).appendTo(".carousel-inner");
                     $(
                         '<li data-target="#carousel_image_project" id"c-indi_' +
@@ -175,6 +217,25 @@ window.addEventListener("DOMContentLoaded", (event) => {
         input_image = setFiles(input_image[0], files_image);
         $("#project_image_count").val(count);
     });
+
+    //event delete background_image
+    $('#btn_delete_background_image').click(function () {
+        //clear input
+        $('#project_background_image').val("");
+        //clear preview
+        $("#background-image-preview").attr("src", "");
+        //hide modal
+        $('#modal-project_background-image').modal('hide');
+        //set preview to false
+        $('#btn-preview-background-image').prop("disabled", true);
+    })
+    //event delete background_image
+    $('#btn_delete_background_image_edit').click(function () {
+        //clear input
+        $('#upload_background_image_edit').val("");
+        //clear preview
+        $("#background-image-preview-edit").attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
+    })
     //delete current image
     $("#btn_delete_image").click(function () {
         var count = $("#project_image_count").val();
@@ -287,6 +348,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var project_name = $("#project_name").val();
         var project_content = $("#project_content").val();
         var project_image = getFiles($("#project_image")[0]);
+        var project_background_image = $("#project_background_image ").prop('files')[0];
         var project_status = 0;
         if ($("#project_status").is(":checked")) {
             project_status = 1;
@@ -305,6 +367,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         formData.append("project_name", project_name);
         formData.append("project_content", project_content);
         formData.append("project_status", project_status);
+        formData.append("project_background_image", project_background_image);
         formData.append("function", "add_project");
         var project_image_count = 0;
         for (var i = 0; i < project_image.length; i++) {
@@ -334,7 +397,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                         $("#form_project").removeClass("was-validated");
                         //reload table
                         $("#table_project").DataTable().ajax.reload();
-    
+
                         //alert
                         $.alert({
                             title: "Success!",
@@ -403,9 +466,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
                         },
                     });
                 }
-                
+
             },
         });
+        return false;
     });
     //end start add project
     //start edit project
@@ -422,6 +486,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var id_split = id.split("_");
         if (id_split[0] == "edit") {
             $('#image_id').val(data.image_id);
+            $('#background_image_id').val(data.backgroud_image_id);
             $("#project_name_edit").val(data.project_name);
             $("#project_content_edit").val(data.project_content);
             if (data.project_status == "0") {
@@ -429,6 +494,62 @@ window.addEventListener("DOMContentLoaded", (event) => {
             } else {
                 $("#edit_project_status").prop("checked", true);
             }
+        }
+        if (id_split[0] == "background") {
+            $.ajax({
+                type: "POST",
+                url: "../controllers/project_controller.php",
+                data: {
+                    project_id: data.project_id,
+                    function: "get_background_image",
+                },
+                success: function (data) {
+                    try {
+                        data = $.parseJSON(data);
+                        console.log(data)
+                        if (data != "") {
+                            var dataTransfer = new DataTransfer();
+                            let image_name = data[0].image_path.split("/");
+                            image_name = image_name[image_name.length - 1];
+                            let image_extension = image_name.split(".");
+                            image_extension =
+                                "image/" + image_extension[image_extension.length - 1];
+                            loadURLToInputFiled(
+                                data[0].image_path,
+                                image_name,
+                                image_extension,
+                                dataTransfer,
+                                "background"
+
+                            );
+                            $('#background-image-preview-edit').attr('src', data[0].image_path);
+
+                        }
+
+                        $("#modal-project_background-image-edit").modal("show");
+                    } catch ($e) {
+                        $.alert({
+                            title: "Alert!",
+                            content: "Something went wrong! reason : " + $e,
+                            type: "red",
+                            typeAnimated: true,
+                            icon: "fa fa-exclamation-circle",
+                            closeIcon: true,
+                            closeIconClass: "fa fa-close",
+                            autoClose: "ok|3000",
+                            animation: "zoom",
+                            closeAnimation: "zoom",
+                            animateFromElement: false,
+                            buttons: {
+                                ok: {
+                                    text: "OK",
+                                    btnClass: "btn-red",
+                                },
+                            },
+                        });
+                    }
+                },
+            });
         }
         if (id_split[0] == "image") {
             project_image_delete = [];
@@ -458,7 +579,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
                                 data[i].image_path,
                                 image_name,
                                 image_extension,
-                                dataTransfer
+                                dataTransfer,
+                                "image"
                             );
                             //create carousel inner
                             $(
@@ -468,7 +590,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                                 data[i].project_image_id +
                                 '" id="project_image_id_' +
                                 image_name +
-                                '" width="450px" height="300px"></div>'
+                                '" width="400px" height="400px"></div>'
                             ).appendTo("#carousel-inner-edit");
                             $(
                                 '<li data-target="#carousel_image_project" class="image_edit" data-slide-to="' +
@@ -507,7 +629,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             });
         }
     });
-    function loadURLToInputFiled(url, name, ext, dataTransfer) {
+    function loadURLToInputFiled(url, name, ext, dataTransfer, type) {
         getImgURL(url, (imgBlob) => {
             // Load img blob to input
             // WIP: UTF8 character error
@@ -519,7 +641,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 "utf-8"
             );
             dataTransfer.items.add(file);
-            document.querySelector("#image_edit").files = dataTransfer.files;
+            if (type != "background") {
+                document.querySelector("#image_edit").files = dataTransfer.files;
+            } else {
+                document.querySelector("#upload_background_image_edit").files = dataTransfer.files;
+            }
+
         });
     }
     // xmlHTTP return blob respond
@@ -588,6 +715,30 @@ window.addEventListener("DOMContentLoaded", (event) => {
         reader.readAsDataURL(this.files[0]);
     });
 
+    //add edit image background
+    $("#upload_background_image_edit").change(function () {
+        Array.from(this.files).map(function (f) {
+            {
+                if (!f.type.match("image.*")) {
+                    {
+                        $.alert({
+                            title: "Error",
+                            type: "red",
+                            typeAnimated: true,
+                            content: "Please upload image only",
+                        });
+                        return;
+                    }
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#background-image-preview-edit').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(f);
+            }
+        });
+    });
+
     $("#add_image_edit").change(function () {
         var count = $("#image_edit_count").val();
         Array.from(this.files).map(function (f) {
@@ -611,7 +762,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                         e.target.result +
                         '" id="project_image_id_' +
                         f.name +
-                        '" width="450px" height="300px"></div>'
+                        '" width="400px" height="400px"></div>'
                     ).appendTo("#carousel-inner-edit");
                     $(
                         '<li data-target="#carousel_image_project" class="image_edit" id"project_image_edit_' +
@@ -765,7 +916,100 @@ window.addEventListener("DOMContentLoaded", (event) => {
                             },
                         },
                     });
-                }               
+                }
+            },
+        });
+    });
+
+    $("#btn_save_background_image_edit").click(function () {
+        var formData = new FormData();
+        var project_id = $("#project_id").val();
+        let project_image_input = $("#upload_background_image_edit")[0];
+        let project_image = project_image_input.files[0];
+        if (project_image == undefined) {
+            project_image = null
+        }
+        console.log(project_image)
+        formData.append("project_id", project_id);
+        formData.append("function", "save_background_image_edit");
+        formData.append("project_background_image", project_image);
+        $.ajax({
+            url: "../controllers/project_controller.php",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#background_image_edit").val(null);
+                try {
+                    console.log(data)
+                    data = JSON.parse(data);
+                    if (data.status == "1") {
+
+                        $("#modal-project_background-image-edit").modal("hide");
+                        //alert
+                        $.alert({
+                            title: "Success!",
+                            content: data.response,
+                            type: "green",
+                            typeAnimated: true,
+                            icon: "fa fa-check-circle",
+                            closeIcon: true,
+                            closeIconClass: "fa fa-close",
+                            autoClose: "ok|3000",
+                            animation: "zoom",
+                            closeAnimation: "zoom",
+                            animateFromElement: false,
+                            buttons: {
+                                ok: {
+                                    text: "OK",
+                                    btnClass: "btn-green",
+                                },
+                            },
+                        });
+                    } else {
+                        //clear form
+                        $.alert({
+                            title: "Error!",
+                            content: data.error,
+                            type: "red",
+                            typeAnimated: true,
+                            icon: "fa fa-exclamation-circle",
+                            closeIcon: true,
+                            closeIconClass: "fa fa-close",
+                            autoClose: "ok|3000",
+                            animation: "zoom",
+                            closeAnimation: "zoom",
+                            animateFromElement: false,
+                            buttons: {
+                                ok: {
+                                    text: "OK",
+                                    btnClass: "btn-red",
+                                },
+                            },
+                        });
+                    }
+                } catch (e) {
+                    $.alert({
+                        title: "Alert!",
+                        content: "Something went wrong! reason : " + e,
+                        type: "red",
+                        typeAnimated: true,
+                        icon: "fa fa-exclamation-circle",
+                        closeIcon: true,
+                        closeIconClass: "fa fa-close",
+                        autoClose: "ok|3000",
+                        animation: "zoom",
+                        closeAnimation: "zoom",
+                        animateFromElement: false,
+                        buttons: {
+                            ok: {
+                                text: "OK",
+                                btnClass: "btn-red",
+                            },
+                        },
+                    });
+                }
             },
         });
     });
@@ -776,11 +1020,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var project_name = $("#project_name_edit").val();
         var project_content = $("#project_content_edit").val();
         var image_id = $('#image_id').val();
+        var background_image_id = $('#background_image_id').val();
+
         var project_status = 0;
         if ($("#project_status_edit").is(":checked")) {
             project_status = 1;
         }
-        if ((project_name == "" || project_content == "" )) {
+        if ((project_name == "" || project_content == "")) {
             $.alert({
                 title: "Error",
                 type: "red",
@@ -797,6 +1043,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 project_name: project_name,
                 project_content: project_content,
                 image_id: image_id,
+                background_image_id: background_image_id,
                 project_status: project_status,
                 function: "save_project_edit",
             },
@@ -869,15 +1116,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
                             },
                         },
                     });
-                }               
+                }
             },
         });
     });
 
-    $("#btn_delete_project").click(function () {
+    $("#btn_delete_project").click(function (e) {
+        e.preventDefault();
         var project_id = $("#project_id").val();
         //alert confirm
         $.alert({
+            scrollToPreviousElement: false,
+            scrollToPreviousElementAnimate: false,
             title: "Confirm!",
             content: "Are you sure you want to delete this project ?",
             type: "red",
@@ -905,6 +1155,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
                                     data = JSON.parse(data);
                                 } catch (e) {
                                     $.alert({
+                                        scrollToPreviousElement: false,
+                                        scrollToPreviousElementAnimate: false,
                                         title: "Alert!",
                                         content: "Something went wrong! reason : " + e,
                                         type: "red",
@@ -965,6 +1217,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
                                             ok: {
                                                 text: "OK",
                                                 btnClass: "btn-red",
+                                                action: function () {
+                                                    //Changed to body and added stop
+                                                    $('body').stop().animate({
+                                                        scrollTop: $('#voters_guide_form').offset().top
+                                                    }, 500);
+                                                }
+
                                             },
                                         },
                                     });
@@ -980,4 +1239,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     });
+    return false;
 });

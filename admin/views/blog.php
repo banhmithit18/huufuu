@@ -75,6 +75,7 @@
                         <th>Thumb image</th>
                         <th>Content</th>
                         <th>Status</th>
+                        <th>Created at</th>
                         <th>Action</th>
                     </tr>
                 </thead>

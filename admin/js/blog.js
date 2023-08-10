@@ -48,6 +48,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
           }
         },
       },
+      { data: "blog_create_date",render:function(data,type,row){
+          let dateParts = data.split(' ');
+          let date = dateParts[0].split('-');
+          let time = dateParts[1];
+          return `${date[2]}-${date[1]}-${date[0]} ${time}`;       
+        } 
+      },
       {
         data: "blog_id",
         className: "dt-body-center",

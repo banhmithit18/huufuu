@@ -15,7 +15,7 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Service</th>
-                        <th>Messenger</th>
+                        <th>Message</th>
                         <th>Created at</th>
                         <th>Status</th>
                         <th>Action</th>

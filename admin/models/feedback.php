@@ -17,6 +17,14 @@ class feedback
      $this->feedback_content = $feedback_content;
     }
 
+    public $feedback_priority;
+    public function GetFeedbackPriority(){
+     return $this->feedback_priority;
+    }
+    public function SetFeedbackPriority($feedback_priority){
+     $this->feedback_priority = $feedback_priority;
+    }
+
     public $image_id;
     public function GetImageId(){
      return $this->image_id;

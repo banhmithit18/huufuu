@@ -1,4 +1,4 @@
-<?php include_once('../controllers/index_controller.php')?>
+<?php include_once('../controllers/index_controller.php') ?>
 
 <!doctype html>
 <html lang="en">
@@ -11,39 +11,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="<?php if(isset($_SESSION['headerLogo'])){ echo $_SESSION['headerLogo'];} else{echo "../icon/logo-dung.svg";}?>">
-
-
-
+    <link rel="icon" type="image/x-icon" href="<?php if (isset($_SESSION['headerLogo'])) {
+                                                    echo $_SESSION['headerLogo'];
+                                                } else {
+                                                    echo "../icon/logo-dung.svg";
+                                                } ?>">
 </head>
-
-<body>
+<body id="body">
+    <div class="page-waiting" id="page-waiting">
+        <img src="../icon/logo-dung.svg" alt="Logo">
+    </div>
+    <div id="body-content">
     <!-- menu-->
+    <script src="../js/loading-page.js"></script>    
     <nav class="navbar navbar-expand-lg nav-bg-menu">
         <div class="container-fluid d-flex justify-content-evenly menu-container">
             <div class="logo">
                 <a class="navbar-brand" href="#">
-                    <img src="<?php if(isset($_SESSION['headerLogo'])){ echo $_SESSION['headerLogo'];} else{echo "../icon/logo-dung.svg";}?>" alt="logo" width="60" height="60">
+                    <img src="<?php if (isset($_SESSION['headerLogo'])) {
+                                    echo $_SESSION['headerLogo'];
+                                } else {
+                                    echo "../icon/logo-dung.svg";
+                                } ?>" alt="logo" width="60" height="60">
                 </a>
             </div>
             <div class="nav-items">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0'
-                                href="index.php">HOME</a>
+                            <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index.php">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu1'
-                                href="service.php">SERVICE</a>
+                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service.php">SERVICE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu3'
-                                href="feedback.php">FEEDBACK</a>
+                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu3' href="feedback.php">FEEDBACK</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu2'
-                                href="contact_us.php">CONTACT US</a>
+                            <a class="nav-link nav-text menu" data-navsubmenuid='submenu2' href="contact_us.php">CONTACT US</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-text menu" data-navsubmenuid='submenu4' href="about_us.php">ABOUT US</a>
@@ -60,13 +65,25 @@
                 </div>
             </div>
             <div class="nav-social d-flex">
-                <a href="<?php if(isset($_SESSION['facebookLink'])){ echo $_SESSION['facebookLink'];} else{echo "";}?>" target="_blank" title="Facebook" id="" class="icon-social px-3">
+                <a href="<?php if (isset($_SESSION['facebookLink'])) {
+                                echo $_SESSION['facebookLink'];
+                            } else {
+                                echo "";
+                            } ?>" target="_blank" title="Facebook" id="" class="icon-social px-3">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a href="<?php if(isset($_SESSION['twitterLink'])){ echo $_SESSION['twitterLink'];} else{echo "";}?>" target="_blank" title="Twitter" class="icon-social px-3">
+                <a href="<?php if (isset($_SESSION['twitterLink'])) {
+                                echo $_SESSION['twitterLink'];
+                            } else {
+                                echo "";
+                            } ?>" target="_blank" title="Twitter" class="icon-social px-3">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a href="<?php if(isset($_SESSION['linkedin'])){ echo $_SESSION['linkedin'];} else{echo "";}?>" target="_blank" title="Linkedin" class="icon-social px-3">
+                <a href="<?php if (isset($_SESSION['linkedin'])) {
+                                echo $_SESSION['linkedin'];
+                            } else {
+                                echo "";
+                            } ?>" target="_blank" title="Linkedin" class="icon-social px-3">
                     <i class="fa fa-linkedin"></i>
                 </a>
             </div>

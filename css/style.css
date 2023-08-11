@@ -10,11 +10,10 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  cursor:url('../icon/white-cursor.svg'), auto !important;
+  cursor: url("../icon/white-cursor.svg"), auto !important;
 }
 body {
   font-family: AnekLatin;
-
 }
 
 .footer-content {
@@ -185,7 +184,7 @@ body {
   }
 }
 .production:hover .img-pos {
-   opacity: 0; 
+  opacity: 0;
 }
 .production:hover .img-holder {
   /* opacity: 0.4; */
@@ -193,10 +192,10 @@ body {
 }
 @keyframes scale {
   5% {
-      -webkit-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
   }
   50% {
-      -webkit-transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 .production:hover .text-main-description {
@@ -1123,47 +1122,74 @@ body {
 }
 
 @keyframes come-in {
-  to { transform: translateY(0); }
+  to {
+    transform: translateY(0);
+  }
 }
 .menu-mobile-icon {
   color: rgba(255, 255, 255, 0.45);
   font-size: 2rem;
 }
-.menu-mobile-item{
+.menu-mobile-item {
   padding-right: 2rem;
   font-size: 1.3rem;
 }
-.nav-submenu-mobile{
+.nav-submenu-mobile {
   display: none;
   text-align: right;
 }
-.nav-items-mobile{
+.nav-items-mobile {
   display: none;
 }
 @media only screen and (max-width: 995px) {
-  .menu-container{
+  .menu-container {
     justify-content: space-between !important;
   }
-  .nav-items-mobile{
-    display: block
+  .nav-items-mobile {
+    display: block;
   }
-  .nav-social{
+  .nav-social {
     display: none !important;
   }
-  .nav-items{
+  .nav-items {
     display: none !important;
   }
 }
 @media only screen and (max-width: 1033px) {
-  .nav-social{
+  .nav-social {
     display: none !important;
   }
 }
-.error-page-text{
+.error-page-text {
   color: rgba(255, 255, 255, 0.8);
   font-size: 5.25rem;
   font-family: AnekLatin-Bold;
 }
+.page-waiting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+}
 
+.page-waiting img {
+  animation: spin 5s linear infinite;
+}
 
-
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.body-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+}

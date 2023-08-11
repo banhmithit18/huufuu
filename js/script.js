@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
    
    var menu_mobile_toogle = false;

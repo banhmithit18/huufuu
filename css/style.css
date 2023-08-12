@@ -1178,11 +1178,12 @@ body {
 }
 
 @keyframes spin {
+  
   0% {
-    transform: rotate(0deg);
+    transform: rotateX(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotateX(360deg);
   }
 }
 .body-loading {

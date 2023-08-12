@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once('../ultis/DBConnection.php');
 
 //default value session
-$_SESSION['categories'] = null;
+$_SESSION['categoriesSer'] = null;
 $_SESSION['services'] = null;
 $_SESSION['number_of_page']  = 1;
 $_SESSION['current_page'] = 1;
@@ -29,15 +29,15 @@ if (isset($_REQUEST['current_category'])) {
     $_SESSION['current_category'] = $current_category;
 }
 
-function getCategory(){
+function getCategorySer(){
     $sql = "SELECT * from category WHERE category_status = 1 ";
     $db = new DBConnection();
-    $categories = $db->Retrive($sql);
-    $_SESSION['categories']  = $categories;
+    $categoriesSer = $db->Retrive($sql);
+    $_SESSION['categoriesSer']  = $categoriesSer;
     //get first category
-    if($categories != null){
-        if(sizeof($categories) > 0 && $_SESSION['current_category'] == 0){
-            $_SESSION['current_category'] = $categories[0]['category_id'];
+    if($categoriesSer != null){
+        if(sizeof($categoriesSer) > 0 && $_SESSION['current_category'] == 0){
+            $_SESSION['current_category'] = $categoriesSer[0]['category_id'];
         }
     }
 }
@@ -64,7 +64,7 @@ function getServiceDetail($service_id){
 
 //function get all project
 if ($function == "get_service") {
-    getCategory();
+    getCategorySer();
     getNumberOfPage();
     $current_category = $_SESSION['current_category'];
     $sql = "SELECT * FROM service JOIN category ON category.category_id = service.category_id 

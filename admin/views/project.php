@@ -13,6 +13,12 @@
                         <label for="name">Name</label>
                         <input class="form-control" id="project_name" type="text" placeholder="Enter project name" required>
                     </div>
+                    <div class="col">
+                        <label for="category>">Category</label>
+                        <select class="form-control" id="category_id">
+                            <option value="0">Select category</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -81,6 +87,7 @@
                     <tr>
                         <th>Index</th>
                         <th>Name</th>
+                        <th>Category</th>
                         <th>Image</th>
                         <th>Image background</th>
                         <th>Status</th>
@@ -126,7 +133,7 @@
                 </div>
                 <div class="modal-footer">
                     <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="project_image_edit" accept="image/*"></label>
-                    <label style ="display:none" id="blog_image_edit_label" class="btn btn-secondary">Add image <input style ="display:none" type="file" hidden id="project_image_add" accept="image/*"></label>
+                    <label style="display:none" id="blog_image_edit_label" class="btn btn-secondary">Add image <input style="display:none" type="file" hidden id="project_image_add" accept="image/*"></label>
 
                     <button style="display:none" type="button" id="btn_delete_image" class="btn btn-danger">Delete</button>
                     <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
@@ -151,7 +158,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                            <img style="width:400px;height:400px" class=" mx-auto d-block" src="" alt="" id="background-image-preview" onerror="this.style.display='none'"> 
+                                <img style="width:400px;height:400px" class=" mx-auto d-block" src="" alt="" id="background-image-preview" onerror="this.style.display='none'">
                             </div>
                         </div>
                     </div>
@@ -180,24 +187,24 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                                <img style="width:400px;height:400px" class="mx-auto d-block" src="" id="background-image-preview-edit" alt=""> 
+                                <img style="width:400px;height:400px" class="mx-auto d-block" src="" id="background-image-preview-edit" alt="">
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                <button type="button" id="btn_save_background_image_edit" class="btn btn-secondary">Save</button>
-                <button type="button" id="btn_delete_background_image_edit" class="btn btn-secondary">Delete</button>
-                <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="upload_background_image_edit" accept="image/*"></label>
-                <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
+                    <button type="button" id="btn_save_background_image_edit" class="btn btn-secondary">Save</button>
+                    <button type="button" id="btn_delete_background_image_edit" class="btn btn-secondary">Delete</button>
+                    <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="upload_background_image_edit" accept="image/*"></label>
+                    <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
- <!-- Modal -->
- <div class="modal fade" id="modal-project-image-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modal-project-image-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -231,7 +238,7 @@
                     <button type="button" id="btn_save_image_edit" class="btn btn-secondary">Save</button>
                     <input type="file" hidden id="image_edit" accept="image/*" multiple>
                     <label id="blog_image_edit_label" class="btn btn-secondary">Upload <input type="file" hidden id="upload_image_edit" accept="image/*"></label>
-                    <label style ="display:none" id="blog_image_edit_label" class="btn btn-secondary">Add image <input style ="display:none" type="file" hidden id="add_image_edit" accept="image/*" multiple></label>
+                    <label style="display:none" id="blog_image_edit_label" class="btn btn-secondary">Add image <input style="display:none" type="file" hidden id="add_image_edit" accept="image/*" multiple></label>
 
                     <button style="display:none" type="button" id="btn_delete_image_edit" class="btn btn-danger">Delete</button>
                     <button type="button" data-dismiss="modal" aria-label="close" class="btn btn-danger">Close</button>
@@ -257,6 +264,12 @@
                             <div class="col">
                                 <label for="name">Name</label>
                                 <input class="form-control" id="project_name_edit" type="text" placeholder="Enter project name" required>
+                            </div>
+                            <div class="col">
+                                <label for="category>">Category</label>
+                                <select class="form-control" id="category_id_edit">
+                                    <option value="0">Select category</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">

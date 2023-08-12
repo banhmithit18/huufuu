@@ -10,7 +10,9 @@ $_SESSION['facebookLink'] = "";
 $_SESSION['twitterLink'] = "";
 $_SESSION['linkedinLink'] = "";
 $_SESSION['introduce'] = "";
+$_SESSION['categories'] = null;
 
+getCategory();
 getLogo ();
 getMedia();
 //get logo
@@ -49,4 +51,12 @@ function getMedia (){
     }
 }   
 
+//get category
+//function get category
+function getCategory(){
+    $db = new DBConnection();
+    $sql = "SELECT * FROM category ORDER BY category_id DESC";
+    $result = $db->Retrive($sql);
+    $_SESSION['categories']  = $result;
+}
 ?>

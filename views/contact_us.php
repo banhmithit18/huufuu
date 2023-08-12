@@ -5,7 +5,21 @@
         $_SESSION['service_id'] = $_REQUEST['service_id'];
     }
 ?>
+<script>
+    document.getElementById("menu-home").classList.remove('active');
+    document.getElementById("menu-service").classList.remove('active');
+    document.getElementById("menu-feedback").classList.remove('active');
+    document.getElementById("menu-contact").classList.add('active');
+    document.getElementById("menu-about").classList.remove('active');
+    document.getElementById("menu-blog").classList.remove('active');
 
+    document.getElementById("submenu0").classList.remove('active');
+    document.getElementById("submenu1").classList.remove('active');
+    document.getElementById("submenu3").classList.remove('active');
+    document.getElementById("submenu2").classList.add('active');
+    document.getElementById("submenu4").classList.remove('active');
+    document.getElementById("submenu5").classList.remove('active');
+</script>
 <div class="body-content-wrapper fluid-container">
     <div class="body-content container">
         <div class="row body-content-title">

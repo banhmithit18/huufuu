@@ -17,7 +17,7 @@ if (isset($_REQUEST['function'])) {
 
 //function get all project
 if ($function == "get_project") {
-    $sql = "SELECT * FROM project";
+    $sql = "SELECT * FROM project JOIN category ON project.category_id = category.category_id";
     $db = new DBConnection();
     $result = $db->Retrive($sql);
     echo json_encode($result);
@@ -43,6 +43,7 @@ if ($function == "save_project_edit") {
     $project_id = $_REQUEST['project_id'] == "" ? 0 : $_REQUEST['project_id'];
     $project_name = $_REQUEST['project_name'] == "" ? "" : $_REQUEST['project_name'];
     $project_content = $_REQUEST['project_content'] == "" ? "" : $_REQUEST['project_content'];
+    $category_id = $_REQUEST['category_id'] == "" ? 0 : $_REQUEST['category_id'];
     $project_status = $_REQUEST['project_status'] == "" ? 0 : $_REQUEST['project_status'];
     $sql = "SELECT * FROM project WHERE project_id = $project_id";
     $db = new DBConnection();
@@ -59,6 +60,8 @@ if ($function == "save_project_edit") {
     $project->project_status = $project_status;
     $project->image_id = $image_id;
     $project->background_image_id = $background_image_id;
+    $project->category_id = $category_id;
+
 
 
     $db = new DBConnection();
@@ -96,7 +99,7 @@ if ($function == "save_background_image_edit") {
     $project->project_content = $result[0]['project_content'];
     $project->project_status = $result[0]['project_status'];
     $project->image_id = $result[0]['image_id'];
-
+    $project->category_id = $result[0]['category_id'];
 
 
     //upload file to sv
@@ -146,6 +149,7 @@ if ($function == "save_image_edit") {
     $project->project_content = $result[0]['project_content'];
     $project->project_status = $result[0]['project_status'];
     $project->background_image_id = $result[0]['background_image_id'];
+    $project->category_id = $result[0]['category_id'];
 
     //upload file to sv
     $file = $_FILES['project_image_0'];
@@ -175,6 +179,8 @@ if ($function == "add_project") {
     $project_name = $_POST['project_name'] == null ? "" : $_POST['project_name'];
     $project_content = $_POST['project_content'] == null ? 0 : $_POST['project_content'];
     $project_status = $_POST['project_status'] == null ? 0 : $_POST['project_status'];
+    $category_id = $_POST['category_id'] == null ? 0 : $_POST['category_id'];
+
     $image_id = 0;
     $background_image_id = null;
 
@@ -183,6 +189,7 @@ if ($function == "add_project") {
     $project->project_name = $project_name;
     $project->project_content = $project_content;
     $project->project_status = $project_status;
+    $project->category_id = $category_id;
     //get lastId project id
     $db = new DBConnection();
     $lastId =  $db->GetLastId("project") + 1;

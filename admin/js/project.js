@@ -1,4 +1,45 @@
 window.addEventListener("DOMContentLoaded", (event) => {
+    //get cateogry
+    //get category
+    $.ajax({
+        type: "POST",
+        url: "../controllers/category_controller.php",
+        data: {
+            function: "get_category",
+        },
+        success: function (data) {
+            try {
+                data = $.parseJSON(data);
+                //add category to select
+                $.each(data, function (index, value) {
+                    //check if status = 1 (active)
+                    if (value.category_status == 1) {
+                        $("#category_id").append(
+                            '<option value="' +
+                            value.category_id +
+                            '">' +
+                            value.category_name +
+                            "</option>"
+                        );
+                        $("#category_id_edit").append(
+                            '<option value="' +
+                            value.category_id +
+                            '">' +
+                            value.category_name +
+                            "</option>"
+                        );
+                    }
+                });
+            } catch (error) {
+                $.alert({
+                    title: "Error",
+                    type: "red",
+                    typeAnimated: true,
+                    content: "Cannot get category, error: " + error,
+                });
+            }
+        },
+    });
     //init table
     var t = $("#table_project").DataTable({
         ajax: {
@@ -9,6 +50,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         columns: [
             { data: null },
             { data: "project_name" },
+            { data: "category_name" },
             {
                 data: "project_id",
                 className: "dt-body-center",
@@ -350,6 +392,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var project_image = getFiles($("#project_image")[0]);
         var project_background_image = $("#project_background_image ").prop('files')[0];
         var project_status = 0;
+        var category_id = $("#category_id").find(":selected").val();
+
+        if (category_id == "0") {
+            $.alert({
+              title: "Error",
+              type: "red",
+              typeAnimated: true,
+              content: "Please select category",
+            });
+            return;
+          }
         if ($("#project_status").is(":checked")) {
             project_status = 1;
         }
@@ -367,6 +420,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         formData.append("project_name", project_name);
         formData.append("project_content", project_content);
         formData.append("project_status", project_status);
+        formData.append("category_id", category_id);
         formData.append("project_background_image", project_background_image);
         formData.append("function", "add_project");
         var project_image_count = 0;
@@ -489,6 +543,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             $('#background_image_id').val(data.backgroud_image_id);
             $("#project_name_edit").val(data.project_name);
             $("#project_content_edit").val(data.project_content);
+            $("#category_id_edit").val(data.category_id);
             if (data.project_status == "0") {
                 $("#edit_project_status").prop("checked", false);
             } else {
@@ -1021,6 +1076,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var project_content = $("#project_content_edit").val();
         var image_id = $('#image_id').val();
         var background_image_id = $('#background_image_id').val();
+        var category_id = $("#category_id_edit").find(":selected").val();
 
         var project_status = 0;
         if ($("#project_status_edit").is(":checked")) {
@@ -1045,6 +1101,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 image_id: image_id,
                 background_image_id: background_image_id,
                 project_status: project_status,
+                category_id:category_id,
                 function: "save_project_edit",
             },
             success: function (data) {

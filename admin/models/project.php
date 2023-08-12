@@ -17,6 +17,14 @@ class project
      $this->project_content = $project_content;
     }
 
+    public $category_id;
+    public function getCategoryId(){
+     return $this->project_content;
+    }
+    public function setCategoryId($category_id){
+     $this->category_id = $category_id;
+    }
+
     public $image_id;
     public function GetImageId(){
      return $this->image_id;

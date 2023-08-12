@@ -1,6 +1,20 @@
 <?php include_once('../controllers/about_us_controller.php')?>
 <?php include_once('../includes/header.php')?>
+<script>
+    document.getElementById("menu-home").classList.remove('active');
+    document.getElementById("menu-service").classList.remove('active');
+    document.getElementById("menu-feedback").classList.remove('active');
+    document.getElementById("menu-contact").classList.remove('active');
+    document.getElementById("menu-about").classList.add('active');
+    document.getElementById("menu-blog").classList.remove('active');
 
+    document.getElementById("submenu0").classList.remove('active');
+    document.getElementById("submenu1").classList.remove('active');
+    document.getElementById("submenu2").classList.remove('active');
+    document.getElementById("submenu3").classList.remove('active');
+    document.getElementById("submenu4").classList.add('active');
+    document.getElementById("submenu5").classList.remove('active');
+</script>
 <div class="body-content-wrapper fluid-container">
         <div class="body-content container">
             <div class="row body-content-title">

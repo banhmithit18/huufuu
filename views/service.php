@@ -1,6 +1,20 @@
 <?php include_once('../controllers/service_controller.php') ?>
 <?php include_once('../includes/header.php') ?>
+<script>
+    document.getElementById("menu-home").classList.remove('active');
+    document.getElementById("menu-service").classList.add('active');
+    document.getElementById("menu-feedback").classList.remove('active');
+    document.getElementById("menu-contact").classList.remove('active');
+    document.getElementById("menu-about").classList.remove('active');
+    document.getElementById("menu-blog").classList.remove('active');
 
+    document.getElementById("submenu0").classList.remove('active');
+    document.getElementById("submenu1").classList.add('active');
+    document.getElementById("submenu2").classList.remove('active');
+    document.getElementById("submenu3").classList.remove('active');
+    document.getElementById("submenu4").classList.remove('active');
+    document.getElementById("submenu5").classList.remove('active');
+</script>
 <div class="body-content-wrapper fluid-container">
     <div class="body-content container">
         <div class="row body-content-title">
@@ -17,8 +31,8 @@
                     $cateogories = null;
                     $if_first = true;
                     $active_category = 0;
-                    if (isset($_SESSION['categories'])) {
-                        $cateogories = $_SESSION['categories'];
+                    if (isset($_SESSION['categoriesSer'])) {
+                        $cateogories = $_SESSION['categoriesSer'];
                     }
                     if ($cateogories != null) {
                         $active_category = $cateogories[0]['category_id'];

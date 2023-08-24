@@ -20,7 +20,7 @@
             <div class="row body-content-title">
                 <div class="col d-flex justify-content-start nav-container">
                     <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
-                    <span class="footer-content-detail-link nav-name" href="#">&nbsp;/&nbsp; </span>
+                    <span class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </span>
                     <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="about-us.php">ABOUT
                         US</a>
                 </div>

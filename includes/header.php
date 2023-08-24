@@ -11,11 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="<?php if (isset($_SESSION['headerLogo'])) {
-                                                    echo $_SESSION['headerLogo'];
-                                                } else {
-                                                    echo "../icon/logo-dung.svg";
-                                                } ?>">
+    <link rel="icon" type="image/x-icon" href="../icon/logo-dung.svg">
 </head>
 
 <body id="body">
@@ -32,18 +28,18 @@
                         <img src="<?php if (isset($_SESSION['headerLogo'])) {
                                         echo $_SESSION['headerLogo'];
                                     } else {
-                                        echo "../icon/logo-dung.svg";
-                                    } ?>" alt="logo" width="60" height="60">
+                                        echo "../icon/logo-ngang.svg";
+                                    } ?>" alt="logo" width="200" height="60">
                     </a>
                 </div>
                 <div class="nav-items">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index.php" id="menu-home">HOME</a>
+                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index.php" id="menu-home"><p class="nav-text-hover">HOME</p></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service.php" id="menu-service">SERVICE</a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service.php" id="menu-service"><p class="nav-text-hover">SERVICE</p></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link nav-text menu" data-navsubmenuid='submenu3' href="feedback.php" id="menu-feedback">FEEDBACK</a>

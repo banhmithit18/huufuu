@@ -68,10 +68,14 @@ function switchTab(event, category, isDeafult) {
                                 if (details != "") {
                                     for (let y = 0; y < details.length; y++) {
                                         html = html + '<div class="service-card-text-wrapper service-line-top-border">'
+                                            + '<div class="flex-service-detail-row">'
+                                            + '<img src="../icon/tick.png" class="left-image" style="width:25px;height:25px">'
                                             + '<div class="service-text">'
                                             +   details[y]['service_detail_value']
-                                            +    '</div>'
+                                            + '</div>'
+                                            + '</div>'
                                             + '</div>';
+
                                     }
                                 }
                                 html = html + '</div>';
@@ -176,10 +180,13 @@ function nextPage(event, category) {
                         if (details != "") {
                             for (let y = 0; y < details.length; y++) {
                                 html = html + '<div class="service-card-text-wrapper service-line-top-border">'
-                                    + '<div class="service-text">'
-                                    +  details[y]['service_detail_value'] 
-                                    +    '</div>'
-                                    + '</div>';
+                                            + '<div class="flex-service-detail-row">'
+                                            + '<img src="../icon/tick.png" class="left-image" style="width:25px;height:25px">'
+                                            + '<div class="service-text">'
+                                            +   details[y]['service_detail_value']
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>';
                             }
                         }
                         html = html + '</div>';

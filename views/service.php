@@ -20,8 +20,8 @@
         <div class="row body-content-title">
             <div class="col d-flex justify-content-start nav-container">
                 <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
-                <a class="footer-content-detail-link nav-name" href="#">&nbsp;/&nbsp; </a>
-                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#">SERVICE</a>
+                <a class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </a>
+                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#a">SERVICE</a>
             </div>
         </div>
         <div class="row body-content-detail service-wrapper pt-3">
@@ -86,8 +86,11 @@
                                     if ($details != "") {
                                         foreach ($details as $detail) {
                                             $html = $html . '<div class="service-card-text-wrapper service-line-top-border">
-                                                            <div class="service-text">
-                                                                ' . $detail['service_detail_value'] . '
+                                                            <div class="flex-service-detail-row">
+                                                                <img src="../icon/tick.png" class="left-image" style="width:25px;height:25px">
+                                                                <div class="service-text">                                                            
+                                                                    ' . $detail['service_detail_value'] . '
+                                                                </div>
                                                             </div>
                                                         </div>';
                                         }

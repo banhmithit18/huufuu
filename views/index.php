@@ -22,7 +22,11 @@ if (isset($_REQUEST['category'])) {
                                     <div class="production">
                                         <div class="overlay"></div>
                                         <div class="img-holder"  style="background-image:url(\'' . $background_image_path . '\')">
-                                            <a href="#">
+                                            <img src="../icon/top-left.png" class="top-left corner-img" >
+                                            <img src="../icon/top-right.png" class="top-right corner-img">
+                                            <img src="../icon/bot-left.png" class="bottom-left corner-img">
+                                            <img src="../icon/bot-right.png" class="bottom-right corner-img">
+                                            <a href="#a">
                                                 <img class=" img-prop img-pos" src="' . $image_path . '" alt="img">
                                             </a>
                                         </div>

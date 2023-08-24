@@ -2,12 +2,12 @@
 <a id="back-to-top-button"></a>
 <footer class="nav-bg-menu-footer" id="footer">
     <div class="d-flex justify-content-start">
-        <div class="footer-img ps-4">
+        <div class="footer-img ps-4 pt-5">
             <img class="footer-logo img-fluid." src="<?php if (isset($_SESSION['footerLogo'])) {
                                                             echo $_SESSION['footerLogo'];
                                                         } else {
-                                                            echo "../icon/logo-ngang.svg";
-                                                        } ?>" alt="logo" width="200" height="160">
+                                                            echo "../icon/logo-dung.svg";
+                                                        } ?>" alt="logo" width="200" height="200">
         </div>
 
         <div class="container">

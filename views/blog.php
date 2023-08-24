@@ -20,8 +20,8 @@
         <div class="row body-content-title">
             <div class="col d-flex justify-content-start nav-container">
                 <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
-                <a class="footer-content-detail-link nav-name" href="#">&nbsp;/&nbsp; </a>
-                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#">BLOG</a>
+                <a class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </a>
+                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#a">BLOG</a>
             </div>
         </div>
         <div class="row body-content-detail blog-row-wrapper" id="blog-content-wrapper" style="padding-bottom:20px">

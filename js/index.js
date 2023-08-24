@@ -54,7 +54,7 @@ function nextPage(event) {
                                  +       '<div class="production">'
                                  +           '<div class="overlay"></div>'
                                  +           '<div class="img-holder"  style="background-image:url(\''+backgroundImagePath+'\')">'
-                                 +               '<a href="#">'
+                                 +               '<a href="#a">'
                                  +                   '<img class=" img-prop img-pos" src="'+imagePath+'" alt="img">'
                                  +               '</a>'
                                  +           '</div>'

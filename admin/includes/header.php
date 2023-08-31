@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../views/login.php");
+    header("Location: login");
 }
 ?>
 
@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php">Admin</a>
+        <a class="navbar-brand ps-3" href="index">Admin</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar-->
@@ -52,67 +52,67 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="../views/project.php">
+                        <a class="nav-link" href="project.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                             Project
                         </a>
-                        <a class="nav-link" href="../views/contact_us.php">
+                        <a class="nav-link" href="contact_us.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-book"></i></div>
                             Contact
                         </a>
-                        <a class="nav-link" href="../views/review.php">
+                        <a class="nav-link" href="review.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
                             Review
                         </a>
-                        <a class="nav-link" href="../views/feedback.php">
+                        <a class="nav-link" href="feedback.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
                             Feedback
                         </a>
-                        <a class="nav-link" href="../views/service.php">
+                        <a class="nav-link" href="service.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-solid fa-box"></i></div>
                             Service
                         </a>
-                        <a class="nav-link" href="../views/blog.php">
+                        <a class="nav-link" href="blog.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-square-pen"></i></div>
                             Blog
                         </a>
-                        <a class="nav-link" href="../views/faq.php">
+                        <a class="nav-link" href="faq.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-question"></i></div>
                             FAQ
                         </a>
-                        <a class="nav-link" href="../views/customer.php">
+                        <a class="nav-link" href="customer.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Customer
                         </a>
-                        <a class="nav-link" href="../views/banner.php">
+                        <a class="nav-link" href="banner.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-panorama"></i></div>
                             Banner
                         </a>
-                        <a class="nav-link" href="../views/image.php">
+                        <a class="nav-link" href="image.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                             Image
                         </a>
-                        <a class="nav-link" href="../views/category.php">
+                        <a class="nav-link" href="category.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-table-cells-large"></i></div>
                             Category
                         </a>
-                        <a class="nav-link" href="../views/user.php">
+                        <a class="nav-link" href="user.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-id-badge"></i></div>
                             User
                         </a>
-                        <a class="nav-link" href="../views/about_us.php">
+                        <a class="nav-link" href="about_us.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
                             About us
                         </a>
-                        <a class="nav-link" href="../views/media.php">
+                        <a class="nav-link" href="media.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-location-dot"></i></div>
                             Media
                         </a>
-                        <a class="nav-link" href="../views/logo.php">
+                        <a class="nav-link" href="logo.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                             Logo
                         </a>
-                        <a class="nav-link" href="../views/log.php">
+                        <a class="nav-link" href="log.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-file-lines"></i></div>
                             Log
                         </a>                       

@@ -1,0 +1,22 @@
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+# Map http://www.example.com to /views.
+RewriteRule ^$ /views/ [L]
+
+# Map http://www.example.com/x to /views/x unless there is a x in the web root.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/views/
+RewriteRule ^(.*)$ /views/$1
+
+# Add trailing slash to directories within views
+
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+</IfModule>
+# END WordPres

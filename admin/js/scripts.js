@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         function: "logout",
       },
       success: function (data) {
-        window.location.href = "../../admin/views/login.php";
+        window.location.href = "login";
       },
     });
   });

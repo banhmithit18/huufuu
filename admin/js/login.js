@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         try {
           var data = $.parseJSON(data);
           if (data.status == "1") {
-            window.location.href = "../views/index.php";
+            window.location.href = "index";
           } else {
             $.alert({
               title: "Login failed!",

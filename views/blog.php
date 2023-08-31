@@ -19,7 +19,7 @@
     <div class="body-content container">
         <div class="row body-content-title">
             <div class="col d-flex justify-content-start nav-container">
-                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
+                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index">HOME</a>
                 <a class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </a>
                 <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#a">BLOG</a>
             </div>
@@ -53,7 +53,7 @@
                                     <div class="blog-background"></div>
                                     <div class="blog-thumbnail" style="background-image:url(\''.$background.'\')"></div>
                                     <div class="blog-card-info">
-                                        <a class="blog-title blog-text blog-text-title" href="blog_detail.php?id='.$blogId.'">
+                                        <a class="blog-title blog-text blog-text-title" href="blog_detail?id='.$blogId.'">
                                             '.$blogTitle.'
                                         </a>
                                         <div class="blog-time blog-text blog-text-time">

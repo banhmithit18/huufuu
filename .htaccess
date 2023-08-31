@@ -1,0 +1,29 @@
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+#hide param url
+RewriteCond %{QUERY_STRING} .
+RewriteRule ^index$ /index? [L,R=301]
+RewriteRule ^blog_detail$ /blog_detail? [L,R=301]
+
+# Map http://www.example.com to /views.
+RewriteRule ^$ /views/ [L]
+
+# Map http://www.example.com/x to /views/x unless there is a x in the web root.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/views/
+RewriteRule ^(.*)$ /views/$1
+
+# Add trailing slash to directories within views
+# This does not expose the internal URL.
+RewriteCond %{SCRIPT_FILENAME} -d
+RewriteRule ^views/(.*[^/])$ http://www.example.com/$1/ [R=301]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+</IfModule>
+# END WordPres

@@ -6,7 +6,7 @@
         $blog =  $_SESSION['blog'];
     }
     if($blog == null){
-        header('Location: error_page.php');
+        header('Location: error_page');
         exit();
     }else{
         $blogId = $blog[0]['blog_id'];
@@ -42,9 +42,9 @@
     <div class="body-content container">
         <div class="row body-content-title">
             <div class="col d-flex justify-content-start nav-container">
-                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
+                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index">HOME</a>
                 <a class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </a>
-                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="blog.php">BLOG</a>
+                <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="blog">BLOG</a>
                 <span class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </span>
                     <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="#a"><?php echo $blogTitle?></a>
             </div>
@@ -93,7 +93,7 @@
                             $html = '<div class="col-lg-4 col-md-6 col-sm-8 blog-card-wrapper">
                                         <div class="blog-card-light">
                                             <div class="blog-card-info-light">
-                                                <a class="blog-title blog-text-light blog-text-title-light" href="blog_detail.php?id='.$blogRelativeId.'">
+                                                <a class="blog-title blog-text-light blog-text-title-light" href="blog_detail?id='.$blogRelativeId.'">
                                                     '.$blogRelativeTitle.'
                                                 </a>
                                                 <div class="blog-time blog-text-light blog-text-time">

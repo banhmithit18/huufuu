@@ -80,7 +80,7 @@ function switchTab(event, category, isDeafult) {
                                 }
                                 html = html + '</div>';
                                 html = html + '<div class="service-button-wrapper">'
-                                    + ' <button onclick="location.href = \'contact_us.php?service_id=' + id + '\';" type="button" class="service-button px-4 py-1">Liên hệ </button>'
+                                    + ' <button onclick="location.href = \'contact_us?service_id=' + id + '\';" type="button" class="service-button px-4 py-1">Liên hệ </button>'
                                     + '</div>';
                                 html = html + '</div></div>';
 
@@ -191,7 +191,7 @@ function nextPage(event, category) {
                         }
                         html = html + '</div>';
                         html = html + '<div class="service-button-wrapper">'
-                            + ' <button onclick="location.href = \'contact_us.php?service_id=' + id + '\';" type="button" class="service-button px-4 py-1">Liên hệ </button>'
+                            + ' <button onclick="location.href = \'contact_us?service_id=' + id + '\';" type="button" class="service-button px-4 py-1">Liên hệ </button>'
                             + '</div>';
                         html = html + '</div></div>';
                         $('#content-tab-service-' + category).append(html);

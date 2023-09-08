@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         //send ajax
         $.ajax({
           type: "POST",
-          url: "../controllers/media_controller.php",
+          url: "../admin/controllers/media_controller.php",
           data: {
             function: "update_media",
             media_id : media_id,
@@ -56,7 +56,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_media").DataTable({
       ajax: {
-        url: "../controllers/media_controller.php?function=get_media",
+        url: "../admin/controllers/media_controller.php?function=get_media",
         dataSrc: "",
       },
   

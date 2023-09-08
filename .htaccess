@@ -3,9 +3,6 @@
 
 RewriteEngine On
 
-# Map http://www.example.com/admin to /admin/views.
-RewriteRule ^admin$ /admin/views/ [L]
-
 # Map http://www.example.com/admin/x to /admin/views/x unless there is a x in the web root.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

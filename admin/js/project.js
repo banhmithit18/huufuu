@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //get category
     $.ajax({
         type: "POST",
-        url: "../controllers/category_controller.php",
+        url: "../admin/controllers/category_controller.php",
         data: {
             function: "get_category",
         },
@@ -43,7 +43,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_project").DataTable({
         ajax: {
-            url: "../controllers/project_controller.php?function=get_project",
+            url: "../admin/controllers/project_controller.php?function=get_project",
             dataSrc: "",
         },
         rowId: "project_id",
@@ -433,7 +433,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         //send data
         $.ajax({
             type: "POST",
-            url: "../controllers/project_controller.php",
+            url: "../admin/controllers/project_controller.php",
             data: formData,
             contentType: false,
             processData: false,
@@ -553,7 +553,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         if (id_split[0] == "background") {
             $.ajax({
                 type: "POST",
-                url: "../controllers/project_controller.php",
+                url: "../admin/controllers/project_controller.php",
                 data: {
                     project_id: data.project_id,
                     function: "get_background_image",
@@ -610,7 +610,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             project_image_delete = [];
             $.ajax({
                 type: "POST",
-                url: "../controllers/project_controller.php",
+                url: "../admin/controllers/project_controller.php",
                 data: {
                     project_id: data.project_id,
                     function: "get_image",
@@ -898,7 +898,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         formData.append("function", "save_image_edit");
         formData.append("project_image_delete", project_image_delete);
         $.ajax({
-            url: "../controllers/project_controller.php",
+            url: "../admin/controllers/project_controller.php",
             type: "POST",
             data: formData,
             processData: false,
@@ -989,7 +989,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         formData.append("function", "save_background_image_edit");
         formData.append("project_background_image", project_image);
         $.ajax({
-            url: "../controllers/project_controller.php",
+            url: "../admin/controllers/project_controller.php",
             type: "POST",
             data: formData,
             processData: false,
@@ -1092,7 +1092,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             return;
         }
         $.ajax({
-            url: "../controllers/project_controller.php",
+            url: "../admin/controllers/project_controller.php",
             type: "POST",
             data: {
                 project_id: project_id,
@@ -1201,7 +1201,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                     btnClass: "btn-red",
                     action: function () {
                         $.ajax({
-                            url: "../controllers/project_controller.php",
+                            url: "../admin/controllers/project_controller.php",
                             type: "POST",
                             data: {
                                 project_id: project_id,

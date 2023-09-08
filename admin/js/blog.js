@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_blog").DataTable({
     ajax: {
-      url: "../controllers/blog_controller.php?function=get_blog",
+      url: "../admin/controllers/blog_controller.php?function=get_blog",
       dataSrc: "",
     },
     rowId: "blog_id",
@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     //send ajax
     $.ajax({
-      url: "../controllers/blog_controller.php",
+      url: "../admin/controllers/blog_controller.php",
       type: "POST",
       data: {
         blog_id: blog_id,
@@ -215,7 +215,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var content = CKEDITOR.instances.editor_upload_view.getData();
     var content_path = $("#content_id").val();
     $.ajax({
-      url: "../controllers/blog_controller.php",
+      url: "../admin/controllers/blog_controller.php",
       type: "POST",
       data: {
         content_path: content_path,
@@ -304,7 +304,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     form_data.append("image_id", image_id);
     form_data.append("function", "update_image");
     $.ajax({
-      url: "../controllers/blog_controller.php",
+      url: "../admin/controllers/blog_controller.php",
       type: "POST",
       data: form_data,
       contentType: false,
@@ -447,7 +447,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       $("#content_id").val(data.blog_content_path);
       //get content
       $.ajax({
-        url: "../controllers/blog_controller.php",
+        url: "../admin/controllers/blog_controller.php",
         type: "POST",
         data: {
           function: "get_content_blog",
@@ -496,7 +496,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         confirm: function () {
           $.ajax({
             type: "POST",
-            url: "../controllers/blog_controller.php",
+            url: "../admin/controllers/blog_controller.php",
             data: {
               blog_id: blog_id,
               function: "delete_blog",
@@ -636,7 +636,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       type: "POST",
       processData: false,
       contentType: false,
-      url: "../controllers/blog_controller.php",
+      url: "../admin/controllers/blog_controller.php",
       data: data,
       success: function (data) {
         try {

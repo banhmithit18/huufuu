@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_image").DataTable({
     ajax: {
-      url: "../controllers/image_controller.php?function=get_image",
+      url: "../admin/controllers/image_controller.php?function=get_image",
       cache: true,
       dataSrc: function (data) {
         if (data.status == "0") {
@@ -102,7 +102,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         buttons: {
           confirm: function () {
             $.ajax({
-              url: "../controllers/image_controller.php",
+              url: "../admin/controllers/image_controller.php",
               type: "POST",
               data: {
                 image_id: id,

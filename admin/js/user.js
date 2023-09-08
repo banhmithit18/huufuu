@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/user_controller.php",
+        url: "../admin/controllers/user_controller.php",
         data: {
           function: "add_user",
           user_username: user_username,
@@ -128,7 +128,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           var id = $("#edit_user_id").val();
           $.ajax({
             type: "POST",
-            url: "../controllers/user_controller.php",
+            url: "../admin/controllers/user_controller.php",
             data: {
               function: "delete_user",
               user_id: id,
@@ -200,7 +200,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/user_controller.php",
+        url: "../admin/controllers/user_controller.php",
         data: {
           function: "update_user",
           user_id: user_id,
@@ -254,7 +254,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           var user_id = $("#edit_user_id").val();
           $.ajax({
             type: "POST",
-            url: "../controllers/user_controller.php",
+            url: "../admin/controllers/user_controller.php",
             data: {
               function: "reset_password",
               user_id: user_id,
@@ -288,7 +288,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   $.fn.dataTableExt.sErrMode = "none";
   var t = $("#table_user").DataTable({
     ajax: {
-      url: "../controllers/user_controller.php?function=get_user",
+      url: "../admin/controllers/user_controller.php?function=get_user",
       dataSrc: "",
     },
     rowId: "user_id",

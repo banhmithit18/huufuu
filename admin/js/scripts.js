@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   $("#logout").click(function () {
     $.ajax({
       type: "POST",
-      url: "../controllers/login.php",
+      url: "../admin/controllers/login.php",
       data: {
         function: "logout",
       },
@@ -81,7 +81,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var user_id = $("#information_user_id").val();
     $.ajax({
       type: "POST",
-      url: "../controllers/user_controller.php",
+      url: "../admin/controllers/user_controller.php",
       data: {
         function: "change_password",
         user_id: user_id,
@@ -197,7 +197,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/user_controller.php",
+        url: "../admin/controllers/user_controller.php",
         data: {
           function: "update_user",
           user_id: user_id,

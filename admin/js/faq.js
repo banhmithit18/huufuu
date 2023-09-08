@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //send ajax
     $.ajax({
       type: "POST",
-      url: "../controllers/faq_controller.php",
+      url: "../admin/controllers/faq_controller.php",
       data: {
         function: "add_faq",
         faq_question: faq_question,
@@ -111,7 +111,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/faq_controller.php",
+        url: "../admin/controllers/faq_controller.php",
         data: {
           function: "update_faq",
           faq_id : faq_id,
@@ -158,7 +158,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           var id = $("#faq_id").val();
           $.ajax({
             type: "POST",
-            url: "../controllers/faq_controller.php",
+            url: "../admin/controllers/faq_controller.php",
             data: {
               function: "delete_faq",
               faq_id: id,
@@ -196,7 +196,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_faq").DataTable({
     ajax: {
-      url: "../controllers/faq_controller.php?function=get_faq",
+      url: "../admin/controllers/faq_controller.php?function=get_faq",
       dataSrc: "",
     },
 

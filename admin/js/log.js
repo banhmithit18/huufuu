@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_log").DataTable({
-    ajax: { url: "../controllers/log_controller.php", dataSrc: "" },
+    ajax: { url: "../admin/controllers/log_controller.php", dataSrc: "" },
     columns: [
       {data: null},
       { data: "log_name" },

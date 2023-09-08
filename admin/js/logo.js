@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     form_data.append("image_id", image_id);
     form_data.append("function", "update_image");
     $.ajax({
-      url: "../controllers/logo_controller.php",
+      url: "../admin/controllers/logo_controller.php",
       type: "POST",
       data: form_data,
       contentType: false,
@@ -153,7 +153,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_logo").DataTable({
       ajax: {
-        url: "../controllers/logo_controller.php?function=get_logo",
+        url: "../admin/controllers/logo_controller.php?function=get_logo",
         dataSrc: "",
       },
   

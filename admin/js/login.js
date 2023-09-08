@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     $.ajax({
       type: "POST",
-      url: "../controllers/login.php",
+      url: "../admin/controllers/login.php",
       data: {
         function: "login",
         username: username,

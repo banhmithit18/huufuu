@@ -30,4 +30,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/contact_us.js"></script>
+<script src="../admin/js/contact_us.js"></script>

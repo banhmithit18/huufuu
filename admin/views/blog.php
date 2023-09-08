@@ -176,4 +176,4 @@
 
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <?php include("../includes/footer.php") ?>
-<script src="../js/blog.js"></script>
+<script src="../admin/js/blog.js"></script>

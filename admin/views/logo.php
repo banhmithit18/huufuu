@@ -44,4 +44,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/logo.js"></script>
+<script src="../admin/js/logo.js"></script>

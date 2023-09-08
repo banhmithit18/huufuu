@@ -3,10 +3,18 @@
 
 RewriteEngine On
 
-#hide param url
-RewriteCond %{QUERY_STRING} .
-RewriteRule ^index$ /index? [L,R=301]
-RewriteRule ^blog_detail$ /blog_detail? [L,R=301]
+# Map http://www.example.com/admin to /admin/views.
+RewriteRule ^admin$ /admin/views/ [L]
+
+# Map http://www.example.com/admin/x to /admin/views/x unless there is a x in the web root.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/admin/views/
+RewriteRule ^admin/(.*)$ /admin/views/$1 [L]
+
+# Add .php extension to files within admin/views that exist with .php extension but were requested without it.
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 
 # Map http://www.example.com to /views.
 RewriteRule ^$ /views/ [L]
@@ -27,3 +35,5 @@ RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 
 </IfModule>
 # END WordPres
+
+

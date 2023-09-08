@@ -121,4 +121,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/faq.js"></script>
+<script src="../admin/js/faq.js"></script>

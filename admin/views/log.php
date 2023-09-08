@@ -26,4 +26,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/log.js"></script>
+<script src="../admin/js/log.js"></script>

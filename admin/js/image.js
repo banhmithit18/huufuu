@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             buttons: {
               OK: function () {
                 //href to index
-                window.location.href = "../index.php";
+                window.location.href = "../admin/index";
               },
               //try load the page
               "Try again": function () {

@@ -31,4 +31,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/review.js"></script>
+<script src="../admin/js/review.js"></script>

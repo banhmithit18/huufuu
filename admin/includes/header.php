@@ -88,6 +88,10 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Customer
                         </a>
+                        <a class="nav-link" href="contact_question">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-address-book"></i></div>
+                            Contact us question
+                        </a>
                         <a class="nav-link" href="banner">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-panorama"></i></div>
                             Banner

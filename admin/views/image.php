@@ -43,4 +43,4 @@
         </div>
     </div>
 <?php include("../includes/footer.php") ?>
-<script src="../js/image.js"></script>
+<script src="../admin/js/image.js"></script>

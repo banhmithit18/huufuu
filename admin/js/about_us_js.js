@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var content = encodeURIComponent(CKEDITOR.instances.editor.getData());
     //send ajax request
     $.ajax({
-      url: "../controllers/about_us_controller.php",
+      url: "../admin/controllers/about_us_controller.php",
       type: "POST",
       dataType: 'text',
       data: {
@@ -48,7 +48,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //send ajax request to get content
   $.ajax({
-    url: "../controllers/about_us_controller.php",
+    url: "../admin/controllers/about_us_controller.php",
     type: "POST",
     data: {
       function: "get_about_us",

@@ -96,9 +96,9 @@ if ($function == "logout") {
   exit();
 }
 
-if ($_SESSION['user_id'] == null && !isset($_POST["usernaem"]) && !isset($_POST["password"])) {
+if ($_SESSION['user_id'] == null && !isset($_POST["username"]) && !isset($_POST["password"])) {
 
-  echo '<script>window.location.href = "../views/login.php";</script>';
+  echo '<script>window.location.href = "../admin/login";</script>';
 }
 
 

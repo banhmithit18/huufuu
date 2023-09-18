@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="footer-content col-lg-3 col-md-6 col-sm-12">
-                    <a href="about_us.php" class="footer-content-menu-link hover-underline-animation-footer">INTRODUCE</a>
+                    <a href="about_us" class="footer-content-menu-link hover-underline-animation-footer">INTRODUCE</a>
                     <p class="footer-content-detail">
                         <?php if (isset($_SESSION['introduce'])) {
                             echo $_SESSION['introduce'];
@@ -23,7 +23,7 @@
                     </p>
                 </div>
                 <div class="footer-content col-lg-3 col-md-6 col-sm-12 footer-content-contact">
-                    <a href="contact_us.php" class="footer-content-menu-link hover-underline-animation-footer">CONTACT US</a>
+                    <a href="contact_us" class="footer-content-menu-link hover-underline-animation-footer">CONTACT US</a>
                     <div class="footer-content-wrapper">
                         <a href="<?php if (isset($_SESSION['facebookLink'])) {
                                         echo $_SESSION['facebookLink'];
@@ -48,10 +48,10 @@
                     </div>
                 </div>
                 <div class="footer-content col-lg-3 col-md-6 col-sm-12">
-                    <a href="service.php" class="footer-content-menu-link hover-underline-animation-footer">SERVICE</a>
+                    <a href="service" class="footer-content-menu-link hover-underline-animation-footer">SERVICE</a>
                 </div>
                 <div class="footer-content col-lg-3 col-md-6 col-sm-122">
-                    <a href="feedback.php" class="footer-content-menu-link hover-underline-animation-footer">FEEDBACK</a>
+                    <a href="feedback" class="footer-content-menu-link hover-underline-animation-footer">FEEDBACK</a>
                 </div>
             </div>
         </div>

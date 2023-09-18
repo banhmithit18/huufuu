@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_feedback").DataTable({
         ajax: {
-            url: "../controllers/feedback_controller.php?function=get_feedback",
+            url: "../admin/controllers/feedback_controller.php?function=get_feedback",
             dataSrc: "",
         },
         rowId: "feedback_id",
@@ -319,7 +319,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         //send data
         $.ajax({
             type: "POST",
-            url: "../controllers/feedback_controller.php",
+            url: "../admin/controllers/feedback_controller.php",
             data: formData,
             contentType: false,
             processData: false,
@@ -437,7 +437,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             feedback_image_delete = [];
             $.ajax({
                 type: "POST",
-                url: "../controllers/feedback_controller.php",
+                url: "../admin/controllers/feedback_controller.php",
                 data: {
                     feedback_id: data.feedback_id,
                     function: "get_image",
@@ -695,7 +695,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         formData.append("function", "save_image_edit");
         formData.append("feedback_image_delete", feedback_image_delete);
         $.ajax({
-            url: "../controllers/feedback_controller.php",
+            url: "../admin/controllers/feedback_controller.php",
             type: "POST",
             data: formData,
             processData: false,
@@ -794,7 +794,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             return;
         }
         $.ajax({
-            url: "../controllers/feedback_controller.php",
+            url: "../admin/controllers/feedback_controller.php",
             type: "POST",
             data: {
                 feedback_id: feedback_id,
@@ -899,7 +899,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                     btnClass: "btn-red",
                     action: function () {
                         $.ajax({
-                            url: "../controllers/feedback_controller.php",
+                            url: "../admin/controllers/feedback_controller.php",
                             type: "POST",
                             data: {
                                 feedback_id: feedback_id,

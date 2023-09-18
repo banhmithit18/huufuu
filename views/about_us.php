@@ -19,9 +19,9 @@
         <div class="body-content container">
             <div class="row body-content-title">
                 <div class="col d-flex justify-content-start nav-container">
-                    <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index.php">HOME</a>
+                    <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="index">HOME</a>
                     <span class="footer-content-detail-link nav-name" href="#a">&nbsp;/&nbsp; </span>
-                    <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="about-us.php">ABOUT
+                    <a class="footer-content-detail-link nav-name hover-underline-animation-footer" href="about-us">ABOUT
                         US</a>
                 </div>
             </div>
@@ -30,4 +30,4 @@
             </div>
         </div>
     </div>
-<?php include_once('../includes/footer.php')?>
+<?php include_once('../includes/footer')?>

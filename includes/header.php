@@ -36,22 +36,22 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index.php" id="menu-home"><p class="nav-text-hover">HOME</p></a>
+                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index" id="menu-home"><p class="nav-text-hover">HOME</p></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service.php" id="menu-service"><p class="nav-text-hover">SERVICE</p></a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service" id="menu-service"><p class="nav-text-hover">SERVICE</p></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu3' href="feedback.php" id="menu-feedback">FEEDBACK</a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu3' href="feedback" id="menu-feedback">FEEDBACK</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu2' href="contact_us.php" id="menu-contact">CONTACT US</a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu2' href="contact_us" id="menu-contact">CONTACT US</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu4' href="about_us.php" id="menu-about">ABOUT US</a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu4' href="about_us" id="menu-about">ABOUT US</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu5' href="blog.php" id="menu-blog">BLOG</a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu5' href="blog" id="menu-blog">BLOG</a>
                             </li>
                         </ul>
                     </div>
@@ -101,7 +101,7 @@
                             for ($i = 0; $i < sizeof($categories); $i++) {
                                 $categoryName = strtoupper($categories[$i]['category_name']);
                                 $categoryId = $categories[$i]['category_id'];
-                                $html = '<a class="nav-link nav-text nav-text-submenu" aria-current="page" href="index.php?category=' . $categoryId . '">' . $categoryName . '</a>';
+                                $html = '<a class="nav-link nav-text nav-text-submenu" aria-current="page" href="index?category=' . $categoryId . '">' . $categoryName . '</a>';
                                 echo $html;
                             }
                         }
@@ -123,7 +123,7 @@
                             for ($i = 0; $i < sizeof($categories); $i++) {
                                 $categoryName = strtoupper($categories[$i]['category_name']);
                                 $categoryId = $categories[$i]['category_id'];
-                                $html = '<a class="nav-link nav-text nav-text-submenu" aria-current="page" href="index.php?category=' . $categoryId . '">' . $categoryName . '</a>';
+                                $html = '<a class="nav-link nav-text nav-text-submenu" aria-current="page" href="index?category=' . $categoryId . '">' . $categoryName . '</a>';
                                 echo $html;
                             }
                         }
@@ -136,9 +136,9 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-center">
                     <div class="navbar-nav ">
-                        <a class="nav-link nav-text nav-text-submenu" aria-current="page" href="contact_us.php">CONTACT
+                        <a class="nav-link nav-text nav-text-submenu" aria-current="page" href="contact_us">CONTACT
                             US</a>
-                        <a class="nav-link nav-text nav-text-submenu" href="faq.php">FAQ</a>
+                        <a class="nav-link nav-text nav-text-submenu" href="faq">FAQ</a>
                     </div>
                 </div>
             </div>
@@ -173,13 +173,13 @@
         <!--end sub mneu-->
         <!--sub menu mobile-->
         <nav class="navbar navbar-expand-lg nav-bg-menu nav-submenu-mobile" id="nav-submenu-mobile">
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="index.php">HOME</a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="service.php">SERVICE</a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="feedback.php">FEEDBACK</a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="contact_us.php">CONTACT US</a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="about_us.php">ABOUT US </a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="blog.php">BLOG</a>
-            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="faq.php">FAQ</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="index">HOME</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="service">SERVICE</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="feedback">FEEDBACK</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="contact_us">CONTACT US</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="about_us">ABOUT US </a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="blog">BLOG</a>
+            <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="faq">FAQ</a>
 
         </nav>
         <!--end sub mneu mobile-->

@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_banner").DataTable({
       ajax: {
-        url: "../controllers/banner_controller.php?function=get_banner",
+        url: "../admin/controllers/banner_controller.php?function=get_banner",
         dataSrc: "",
       },
       rowId: "banner_id",
@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   
       //send ajax
       $.ajax({
-        url: "../controllers/banner_controller.php",
+        url: "../admin/controllers/banner_controller.php",
         type: "POST",
         data: {
           banner_id: banner_id,
@@ -222,7 +222,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         confirm: function () {
           $.ajax({
             type: "POST",
-            url: "../controllers/banner_controller.php",
+            url: "../admin/controllers/banner_controller.php",
             data: {
               banner_id: banner_id,
               function: "delete_banner",
@@ -311,7 +311,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       form_data.append("image_id", image_id);
       form_data.append("function", "update_image");
       $.ajax({
-        url: "../controllers/banner_controller.php",
+        url: "../admin/controllers/banner_controller.php",
         type: "POST",
         data: form_data,
         contentType: false,
@@ -529,7 +529,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         type: "POST",
         processData: false,
         contentType: false,
-        url: "../controllers/banner_controller.php",
+        url: "../admin/controllers/banner_controller.php",
         data: data,
         success: function (data) {
             console.log(data)

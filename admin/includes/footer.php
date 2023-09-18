@@ -215,8 +215,8 @@
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-<script src="../js/scripts.js"></script>
-<script src="../js/bootstrap-show-password.min.js"></script>
+<script src="../admin/js/scripts.js"></script>
+<script src="../admin/js/bootstrap-show-password.min.js"></script>
 
 </body>
 

@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_service").DataTable({
     ajax: {
-      url: "../controllers/service_controller.php?function=get_service",
+      url: "../admin/controllers/service_controller.php?function=get_service",
       dataSrc: "",
     },
     rowId: "blog_id",
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //get category
   $.ajax({
     type: "POST",
-    url: "../controllers/category_controller.php",
+    url: "../admin/controllers/category_controller.php",
     data: {
       function: "get_category",
     },
@@ -461,7 +461,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //send data
     $.ajax({
       type: "POST",
-      url: "../controllers/service_controller.php",
+      url: "../admin/controllers/service_controller.php",
       data: formData,
       contentType: false,
       processData: false,
@@ -588,7 +588,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       service_image_delete = [];
       $.ajax({
         type: "POST",
-        url: "../controllers/service_controller.php",
+        url: "../admin/controllers/service_controller.php",
         data: {
           service_id: data.service_id,
           function: "get_image",
@@ -663,7 +663,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if (id_split[0] == "detail") {
       $.ajax({
         type: "POST",
-        url: "../controllers/service_controller.php",
+        url: "../admin/controllers/service_controller.php",
         data: {
           service_id: data.service_id,
           function: "get_detail",
@@ -908,7 +908,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     formData.append("function", "save_image_edit");
     formData.append("service_image_delete", service_image_delete);
     $.ajax({
-      url: "../controllers/service_controller.php",
+      url: "../admin/controllers/service_controller.php",
       type: "POST",
       data: formData,
       processData: false,
@@ -1017,7 +1017,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       return;
     }
     $.ajax({
-      url: "../controllers/service_controller.php",
+      url: "../admin/controllers/service_controller.php",
       type: "POST",
       data: {
         service_id: service_id,
@@ -1123,7 +1123,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           btnClass: "btn-red",
           action: function () {
             $.ajax({
-              url: "../controllers/service_controller.php",
+              url: "../admin/controllers/service_controller.php",
               type: "POST",
               data: {
                 service_id: service_id,
@@ -1245,7 +1245,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     var service_id = $("#service_id").val();
     $.ajax({
-      url: "../controllers/service_controller.php",
+      url: "../admin/controllers/service_controller.php",
       type: "POST",
       data: {
         service_id: service_id,

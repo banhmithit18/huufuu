@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //send ajax
     $.ajax({
       type: "POST",
-      url: "../controllers/category_controller.php",
+      url: "../admin/controllers/category_controller.php",
       data: {
         function: "add_category",
         category_name: category_name,
@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //send ajax
     $.ajax({
       type: "POST",
-      url: "../controllers/category_controller.php",
+      url: "../admin/controllers/category_controller.php",
       data: {
         function: "update_category",
         category_id: category_id,
@@ -130,7 +130,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           var id = $("#category_id").val();
           $.ajax({
             type: "POST",
-            url: "../controllers/category_controller.php",
+            url: "../admin/controllers/category_controller.php",
             data: {
               function: "delete_category",
               category_id: id,
@@ -168,7 +168,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_category").DataTable({
     ajax: {
-      url: "../controllers/category_controller.php?function=get_category",
+      url: "../admin/controllers/category_controller.php?function=get_category",
       dataSrc: "",
     },
 

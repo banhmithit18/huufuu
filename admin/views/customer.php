@@ -156,4 +156,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/customer.js"></script>
+<script src="../admin/js/customer.js"></script>

@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_contact_us").DataTable({
     ajax: {
-      url: "../controllers/contact_us_controller.php?function=get_contact",
+      url: "../admin/controllers/contact_us_controller.php?function=get_contact",
       dataSrc: "",
     },
     rowId: "contact_us_id",

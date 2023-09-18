@@ -289,4 +289,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/service.js"></script>
+<script src="../admin/js/service.js"></script>

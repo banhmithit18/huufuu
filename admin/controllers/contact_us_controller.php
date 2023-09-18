@@ -11,19 +11,33 @@ if (isset($_REQUEST['function'])) {
 }
 if($function == "get_contact"){
     $db = new DBConnection();
-    $sql = "SELECT service.service_id, IFNULL(service.service_name, '') AS service_name, 
+    $sql = "SELECT 
     customer.customer_id,customer.customer_name,customer.customer_email, customer.customer_phone,
-    contact_us_id, contact_us_message, contact_us_status, contact_us_created_time
+    contact_us_id, contact_us_status, contact_us_created_time
     FROM `contact_us` 
-    LEFT JOIN `service` ON service.service_id = contact_us.service_id
     JOIN customer ON contact_us.customer_id = customer.customer_id
     ORDER BY contact_us_status";
     $result = $db->Retrive($sql);
     echo json_encode($result);
     die();
 }
+
+if($function == "get_contact_answer"){
+    $contact_us_id = $_REQUEST['contact_us_id'];
+    $db = new DBConnection();
+    $sql = "SELECT *
+    FROM `contact_answer` 
+    JOIN contact_us ON contact_us.contact_us_id = contact_answer.contact_us_id
+    JOIN contact_question ON contact_answer.contact_question_id = contact_question.contact_question_id
+    WHERE contact_us.contact_us_id =  $contact_us_id
+    ORDER BY contact_question_priority";
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
+    die();
+}
+
 if($function == 'handle_contact')
-{
+{   
     $contact_us_id = $_REQUEST['contact_us_id'];
     $contact_us = new contact_us();
     $contact_us->contact_us_id = $contact_us_id;

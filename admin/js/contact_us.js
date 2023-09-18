@@ -11,22 +11,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
       { data: "customer_name" },
       { data: "customer_phone" },
       { data: "customer_email" },
-
       {
-        data: "service_name",
+        data: "contact_us_id",
+        className: "dt-body-center",
         render: function (data, type, row, meta) {
-          if (data != "") {
-            return (
-
-              data 
-
-            );
-          }else{
-            return ""
-          }
+          return (
+            "<button id=view_" +
+            data +
+            ' class="btn btn-sm btn-outline-success btn_view_answer">View</button>'
+          );
         },
       },
-      { data: "contact_us_message" },
       {
         data: "contact_us_created_time",
         render: function (data, type, row, meta) {
@@ -47,7 +42,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         data: "contact_us_status",
         render: function (data, type, row, meta) {
           if (data == "0") {
-            return '<button class="btn btn-sm btn-outline-success">Handle</button>';
+            return '<button id="handle_' + data + '" class="btn btn-sm btn-outline-success">Handle</button>';
           } else {
             return '<button class="btn btn-sm btn-outline-success disabled">Handle</button>';
           }
@@ -79,63 +74,114 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var table = $("#table_contact_us").DataTable();
     var data = table.row($(this).parents("tr")).data();
     var contact_us_id = data.contact_us_id;
-    $.alert({
-      title: "Confirm",
-      type: "orange",
-      content: "Are you sure to handle this contact ?",
-      buttons: {
-        confirm: {
-          text: "Yes",
-          type: "red",
-          btnClass: "btn-blue",
-          action: function () {
-            $.ajax({
-              url: "../admin/controllers/contact_us_controller.php",
-              type: "POST",
-              data: {
-                function: "handle_contact",
-                contact_us_id: contact_us_id,
-              },
-              success: function (data) {
-                try {
-                  data = $.parseJSON(data);
-                  if (data.status == "1") {
-                    $.alert({
-                      title: "Success!",
-                      type: "green",
-                      typeAnimated: true,
-                      content: "Contact has been handled!",
-                    });
-                    //reload table
-                    var t = $("#table_contact_us").DataTable();
-                    t.ajax.reload();
-                  } else {
-                    $.alert({
-                      title: "Error",
-                      type: "red",
-                      typeAnimated: true,
-                      content: "Cannot handle this contact, error: " + data.error,
-                    });
+    //get clicked button
+    var id = this.id;
+    //split first underscore
+    var id_split = id.split("_");
+    if (id_split[0] == 'handle') {
+      $.alert({
+        title: "Confirm",
+        type: "orange",
+        content: "Are you sure to handle this contact ?",
+        buttons: {
+          confirm: {
+            text: "Yes",
+            type: "red",
+            btnClass: "btn-blue",
+            action: function () {
+              $.ajax({
+                url: "../controllers/contact_us_controller.php",
+                type: "POST",
+                data: {
+                  function: "handle_contact",
+                  contact_us_id: contact_us_id,
+                },
+                success: function (data) {
+                  try {
+                    data = $.parseJSON(data);
+                    if (data.status == "1") {
+                      $.alert({
+                        title: "Success!",
+                        type: "green",
+                        typeAnimated: true,
+                        content: "Contact has been handled!",
+                      });
+                      //reload table
+                      var t = $("#table_contact_us").DataTable();
+                      t.ajax.reload();
+                    } else {
+                      $.alert({
+                        title: "Error",
+                        type: "red",
+                        typeAnimated: true,
+                        content: "Cannot handle this contact, error: " + data.error,
+                      });
+                    }
+                  }
+                  catch (e) {
+                    $.alert
+                      ({
+                        title: "Error",
+                        type: "red",
+                        typeAnimated: true,
+                        content: "Something went wrong! Reason: " + e,
+                      });
+                    return;
                   }
                 }
-                catch (e) {
-                  $.alert
-                    ({
-                      title: "Error",
-                      type: "red",
-                      typeAnimated: true,
-                      content: "Something went wrong! Reason: " + e,
-                    });
-                  return;
-                }
-              }
-            })
+              })
+            },
+          },
+          cancel: {
+            text: "No",
           },
         },
-        cancel: {
-          text: "No",
+      });
+    } if (id_split[0] == 'view') {
+      $.ajax({
+        url: "../controllers/contact_us_controller.php",
+        type: "POST",
+        data: {
+          function: "get_contact_answer",
+          'contact_us_id': contact_us_id,
         },
-      },
-    });
+        success: function (data) {
+          try {
+            data = $.parseJSON(data);
+            $("#contact_answer_detail").empty();
+            if (data.length > 0) {
+              for (let i = 0; i < data.length; i++) {
+                console.log(data[i])
+                $("#contact_answer_detail").append(
+                      '<div class="row contact_answer_row">'
+                  +     '<div class="contact_question">'+data[i].contact_question_content+' </div>'
+                  +     '<div class="contact_answer">-  '+data[i].contact_answer_content+'</div>'
+                  +  '</div>'
+                );
+              }
+              $('#modal-contact-answer').modal('show');
+
+            } else {
+              $.alert({
+                title: "Error",
+                type: "red",
+                typeAnimated: true,
+                content: "Data not found"
+              });
+            }
+          }
+          catch (e) {
+            $.alert
+              ({
+                title: "Error",
+                type: "red",
+                typeAnimated: true,
+                content: "Something went wrong! Reason: " + e,
+              });
+            return;
+          }
+        }
+      })
+    }
   });
 });

@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg nav-bg-menu">
             <div class="container-fluid d-flex justify-content-evenly menu-container">
                 <div class="logo">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="index.php">
                         <img src="<?php if (isset($_SESSION['headerLogo'])) {
                                         echo $_SESSION['headerLogo'];
                                     } else {

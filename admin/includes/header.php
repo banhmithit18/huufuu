@@ -56,6 +56,10 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                             Project
                         </a>
+                        <a class="nav-link" href="project_detail">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
+                            Project Detail
+                        </a>
                         <a class="nav-link" href="contact_us">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-book"></i></div>
                             Contact

@@ -3,6 +3,8 @@ define("IMAGE_WIDTH", 400);
 define("IMAGE_HEIGHT", 400);
 
 session_start();
+$PATH = '../../img/project_detail/';
+
 require_once('../ultis/DBConnection.php');
 require_once('../models/log.php');
 require_once('../models/project.php');
@@ -15,9 +17,68 @@ if (isset($_REQUEST['function'])) {
     $function = $_REQUEST['function'];
 }
 
+//function get project detail
+
+if ($function == "update_project_detail") {
+    $project_id = $_REQUEST['project_id'];
+    $content = $_REQUEST['content'];  
+    try {
+        $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', "w");
+        $content = urldecode($content);
+        fwrite($file, $content);
+        fclose($file);
+        //uppdate project
+        $sql = "SELECT * FROM project WHERE project_id = $project_id";
+        $db = new DBConnection();
+        $result = $db->Retrive($sql);
+        //get project
+        $project = new project();
+        $project->project_name = $result[0]['project_name'];
+        $project->project_content = $result[0]['project_content'];
+        $project->project_status = $result[0]['project_status'];
+        $project->image_id = $result[0]['image_id'];
+        $project->background_image_id = $result[0]['background_image_id'];
+        $project->category_id = $result[0]['category_id'];
+        $project->hasDetail = 1;
+        $db->Update($project, $project_id);
+        WriteLog("Update project detail", "Upadate project with id: $project_id");
+        $return_message = (array('status' => '1', 'response' => 'Content has been saved successfully', 'error' => ''));
+        echo json_encode($return_message);
+        die();
+    } catch (Exception $e) {
+        echo json_encode(array("status" => "0", "response" => "Content has not been saved successfully", "error" => $e->getMessage()));
+        die();
+    }
+}
+
+if ($function == "get_project_datail") {
+    $project_id = $_REQUEST['project_id'];
+    //create file if not exist
+    if (!file_exists($PATH . 'project_detail_' . $project_id . '.txt')) {
+        $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', 'w');
+        fclose($file);
+    }
+    $content = "";
+    $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', "r");
+    if (filesize($PATH . 'project_detail_' . $project_id . '.txt') > 0) {
+        $content = fread($file, filesize($PATH . 'project_detail_' . $project_id . '.txt'));
+    }
+
+    fclose($file);
+    echo json_encode($content);
+    die();
+}
+
 //function get all project
 if ($function == "get_project") {
-    $sql = "SELECT * FROM project JOIN category ON project.category_id = category.category_id";
+    $sql = "SELECT * FROM project JOIN category ON project.category_id = category.category_id ORDER BY project_id DESC";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
+}
+
+if ($function == "get_list_project") {
+    $sql = "SELECT * FROM project  ORDER BY project_id DESC";
     $db = new DBConnection();
     $result = $db->Retrive($sql);
     echo json_encode($result);
@@ -252,8 +313,8 @@ function UploadImage($imgae, $project_id)
             move_uploaded_file($file_tmp, $file_destination);
             $path = $file_destination;
             //resize image
-            $resize_result = resize_image($path, IMAGE_WIDTH, IMAGE_HEIGHT,true);
-            if("Success" != $resize_result){
+            $resize_result = resize_image($path, IMAGE_WIDTH, IMAGE_HEIGHT, true);
+            if ("Success" != $resize_result) {
                 return array("image_id" => "", "status" => "0", "error" => "not a valid image type");
             }
 

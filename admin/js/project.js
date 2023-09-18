@@ -439,7 +439,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
             processData: false,
             success: function (data) {
                 try {
-                    console.log(data)
                     data = JSON.parse(data);
                     if (data.status == "1") {
                         //clear form

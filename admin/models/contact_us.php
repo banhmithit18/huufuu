@@ -2,17 +2,6 @@
 class contact_us
 {
 
-
-    public $contact_us_message;
-    public function GetContactUsMessage()
-    {
-        return $this->contact_us_message;
-    }
-    public function SetContactUsMessage($contact_us_message)
-    {
-        $this->contact_us_message = $contact_us_message;
-    }
-
     public $contact_us_status;
     public function GetContactUsStatus()
     {
@@ -33,17 +22,15 @@ class contact_us
         $this->customer_id = $customer_id;
     }
 
-    public $service_id;
-    public function GetServiceId()
+    public $contact_us_created_time;
+    public function GetContactUsCreatedTime()
     {
-        return $this->service_id;
+        return $this->contact_us_created_time;
     }
-    public function SetServiceId($service_id)
+    public function SetContactUsCreatedTime($contact_us_created_time)
     {
-        $this->service_id = $service_id;
+        $this->contact_us_created_time = $contact_us_created_time;
     }
-
- 
 
     public function __construct()
     {

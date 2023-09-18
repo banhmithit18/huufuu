@@ -56,11 +56,10 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                             Project
                         </a>
-                        <a class="nav-link" href="../views/project_detail.php">
+                        <a class="nav-link" href="project_detail">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                             Project Detail
                         </a>
-                        <a class="nav-link" href="../views/contact_us.php">
                         <a class="nav-link" href="contact_us">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-book"></i></div>
                             Contact
@@ -81,7 +80,7 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-square-pen"></i></div>
                             Blog
                         </a>
-                        <a class="nav-link" href="../views/faq.php">
+                        <a class="nav-link" href="faq">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-question"></i></div>
                             FAQ
                         </a>

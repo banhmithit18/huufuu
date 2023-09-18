@@ -37,4 +37,4 @@
 
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <?php include("../includes/footer.php") ?>
-<script src="../js/project_detail.js"></script>
+<script src="../admin/js/project_detail.js"></script>

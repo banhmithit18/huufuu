@@ -128,25 +128,34 @@ text .nav-text-submenu {
   position: absolute;
   top: 0;
   left: 0;
+  display: none;
 }
 
 .top-right {
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 
 .bottom-left {
   position: absolute;
   bottom: 0;
   left: 0;
+  display: none;
 }
 
 .bottom-right {
   position: absolute;
   bottom: 0;
   right: 0;
+  display: none;
 }
+
+.production:hover .corner-img {
+  display: block;
+}
+
 .img-prop {
   height: 100%;
   width: -webkit-fill-available;
@@ -411,13 +420,7 @@ text .nav-text-submenu {
   text-decoration: none;
   cursor: pointer;
 }
-.blog-text-title:visited {
-  color: rgba(255, 255, 255, 0.8);
-}
-.blog-text-title:hover {
-  color: #d44457;
-}
-.blog-text-title:active {
+.blog-card:hover > .blog-card-info > .blog-text-title {
   color: #d44457;
 }
 .blog-text-time {
@@ -436,13 +439,13 @@ text .nav-text-submenu {
   background: rgba(0, 0, 0, 0.75);
 }
 
-.blog-card:hover > .blog-thumbnail {
-  z-index: 111;
+/* .blog-card:hover > .blog-thumbnail {
+  z-index: 110;
 }
 
 .blog-card:hover > .blog-background {
-  z-index: 110;
-}
+  z-index: 111;
+} */
 
 .blog-card-info {
   padding: 1.5rem;
@@ -458,7 +461,7 @@ text .nav-text-submenu {
   background-position-x: center;
   background-position-y: center;
   position: absolute;
-  z-index: 110;
+  z-index: 111;
   height: 100%;
   width: 100%;
   top: 0;
@@ -515,21 +518,15 @@ text .nav-text-submenu {
   text-decoration: none;
   cursor: pointer;
 }
-.blog-card-light:hover > .blog-card-info-light > .blog-text-title-light:visited {
-  color: rgba(0, 0, 0, 0.8);
-}
-.blog-card-light:hover > .blog-card-info-light > .blog-text-title-light:hover {
-  color: #d44457;
-}
-.blog-card-light:hover > .blog-card-info-light > .blog-text-title-light:active {
-  color: #d44457;
-}
 
 .blog-card-light:hover {
   background-color: black;
 }
 .blog-card-light:hover > .blog-card-info-light > .blog-text-light {
   color: white;
+}
+.blog-card-light:hover > .blog-card-info-light > .blog-text-title-light {
+  color: #d44457;
 }
 .blog-card-light {
   padding: 2rem;

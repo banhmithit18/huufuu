@@ -1,4 +1,3 @@
-<?php include_once('../controllers/faq_controller.php') ?>
 <?php include_once('../includes/header.php') ?>
 
 <div class="body-content-wrapper fluid-container" >

@@ -15,8 +15,8 @@ if (isset($_REQUEST['current_page'])) {
     $_SESSION['current_page'] = $page;
 }
 //set category
-if (isset($_SESSION['category_id'])) {
-    $category_id = $_SESSION['category_id'] == null ? 0 : $_SESSION['category_id'];
+if (isset($_REQUEST['category'])) {
+    $category_id = $_REQUEST['category'] == null ? 0 : $_REQUEST['category'];
 }
 //get function from ajax
 $function = "get_project";
@@ -48,13 +48,13 @@ if ($function == "get_project") {
     getNumberOfPage();
     $sql = "";
     if ($GLOBALS['category_id'] != 0) {
-        $sql = "SELECT project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
+        $sql = "SELECT project.hasDetail, project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
                 JOIN image ON project.image_id = image.image_id 
                 LEFT JOIN image background ON project.background_image_id = background.image_id 
                 JOIN category ON category.category_id = project.category_id
                 WHERE project_status = 1 AND project.category_id = " . $GLOBALS['category_id'] . " LIMIT 12 OFFSET " . ($_SESSION['current_page']  - 1) * 12;
     } else {
-        $sql = "SELECT project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
+        $sql = "SELECT project.hasDetail, project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
                 JOIN image ON project.image_id = image.image_id 
                 LEFT JOIN image background ON project.background_image_id = background.image_id 
                 WHERE project_status = 1 LIMIT 12 OFFSET " . ($_SESSION['current_page']  - 1) * 12;
@@ -73,13 +73,13 @@ if ($function == "next_page") {
     getNumberOfPage();
     $sql = "";
     if ($GLOBALS['category_id'] != 0) {
-        $sql = "SELECT project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
+        $sql = "SELECT project.hasDetail, project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
         JOIN image ON project.image_id = image.image_id 
         LEFT JOIN image background ON project.background_image_id = background.image_id 
         JOIN category ON category.category_id = project.category_id
         WHERE project_status = 1 AND project.category_id = " . $GLOBALS['category_id'] . " LIMIT 12 OFFSET " . ($currentPage  - 1) * 12;
     }else{
-        $sql = "SELECT project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
+        $sql = "SELECT project.hasDetail, project_id,project_name,project_content,image.image_path, background.image_path as 'background_image_path' FROM project
         JOIN image ON project.image_id = image.image_id 
         LEFT JOIN image background ON project.background_image_id = background.image_id 
         WHERE project_status = 1 LIMIT 12 OFFSET " . ($currentPage  - 1) * 12;

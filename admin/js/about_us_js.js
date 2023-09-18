@@ -19,7 +19,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       },
       success: function (data) {
         var data = $.parseJSON(data);
-        console.log(data);
         if (data.status == "1") {
             var alert = '<div class="alert alert-success" role="alert">'
             +data.response 

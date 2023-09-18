@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/contact_question_controller.php",
+        url: "../admin/controllers/contact_question_controller.php",
         data: {
           function: "add_contact_question",
           contact_question_content: contact_question_content,
@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         //send ajax
         $.ajax({
           type: "POST",
-          url: "../controllers/contact_question_controller.php",
+          url: "../admin/controllers/contact_question_controller.php",
           data: {
             function: "update_contact_question",
             contact_question_id : contact_question_id,
@@ -157,7 +157,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //init table
     var t = $("#table_contact_question").DataTable({
       ajax: {
-        url: "../controllers/contact_question_controller.php?function=get_contact_question",
+        url: "../admin/controllers/contact_question_controller.php?function=get_contact_question",
         dataSrc: "",
       },
   

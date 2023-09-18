@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       return false;
     }
     $.ajax({
-      url: "../controllers/project_controller.php",
+      url: "../admin/controllers/project_controller.php",
       type: "POST",
       data: {
         function: "get_project_datail",
@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //get project
   $.ajax({
     type: "POST",
-    url: "../controllers/project_controller.php",
+    url: "../admin/controllers/project_controller.php",
     data: {
       function: "get_list_project",
     },
@@ -94,7 +94,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var content = encodeURIComponent(CKEDITOR.instances.editor.getData());
     //send ajax request
     $.ajax({
-      url: "../controllers/project_controller.php",
+      url: "../admin/controllers/project_controller.php",
       type: "POST",
       dataType: 'text',
       data: {

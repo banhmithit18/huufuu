@@ -36,10 +36,14 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index" id="menu-home"><p class="nav-text-hover">HOME</p></a>
+                                <a class="nav-link nav-text menu active" data-navsubmenuid='submenu0' href="index" id="menu-home">
+                                    <p class="nav-text-hover">HOME</p>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service" id="menu-service"><p class="nav-text-hover">SERVICE</p></a>
+                                <a class="nav-link nav-text menu" data-navsubmenuid='submenu1' href="service" id="menu-service">
+                                    <p class="nav-text-hover">SERVICE</p>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link nav-text menu" data-navsubmenuid='submenu3' href="feedback" id="menu-feedback">FEEDBACK</a>
@@ -114,7 +118,7 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-center">
                     <div class="navbar-nav ">
-                    <?php
+                        <?php
                         $categories = null;
                         if (isset($_SESSION['categories'])) {
                             $categories = $_SESSION['categories'];
@@ -171,6 +175,27 @@
             </div>
         </nav>
         <!--end sub mneu-->
+        <!-- category for mobile -->
+        <nav class="navbar navbar-expand-lg nav-bg-submenu py-0 nav-items-mobile">
+            <div class="container-fluid d-flex justify-content-center">
+                <div class="navbar-nav d-flex flex-row ">
+                    <?php
+                    $categories = null;
+                    if (isset($_SESSION['categories'])) {
+                        $categories = $_SESSION['categories'];
+                    }
+                    if ($categories != null) {
+                        for ($i = 0; $i < sizeof($categories); $i++) {
+                            $categoryName = strtoupper($categories[$i]['category_name']);
+                            $categoryId = $categories[$i]['category_id'];
+                            $html = '<a class="nav-link nav-text-category-mobile" aria-current="page" href="index?category=' . $categoryId . '">' . $categoryName . '</a>';
+                            echo $html;
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </nav>
         <!--sub menu mobile-->
         <nav class="navbar navbar-expand-lg nav-bg-menu nav-submenu-mobile" id="nav-submenu-mobile">
             <a class="nav-link nav-text nav-text-submenu menu-mobile-item" aria-current="page" href="index">HOME</a>

@@ -88,7 +88,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         review_status: review_status
       },
       success: function (data) {
-        console.log(data)
         try {
           data = $.parseJSON(data);
           if (data.status == "1") {

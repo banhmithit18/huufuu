@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             btnClass: "btn-blue",
             action: function () {
               $.ajax({
-                url: "../controllers/contact_us_controller.php",
+                url: "../admin/controllers/contact_us_controller.php",
                 type: "POST",
                 data: {
                   function: "handle_contact",
@@ -139,7 +139,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     } if (id_split[0] == 'view') {
       $.ajax({
-        url: "../controllers/contact_us_controller.php",
+        url: "../admin/controllers/contact_us_controller.php",
         type: "POST",
         data: {
           function: "get_contact_answer",
@@ -151,7 +151,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
             $("#contact_answer_detail").empty();
             if (data.length > 0) {
               for (let i = 0; i < data.length; i++) {
-                console.log(data[i])
                 $("#contact_answer_detail").append(
                       '<div class="row contact_answer_row">'
                   +     '<div class="contact_question">'+data[i].contact_question_content+' </div>'

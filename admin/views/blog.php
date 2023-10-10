@@ -174,6 +174,6 @@
     </div>
 </main>
 
-<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.19.1/full/ckeditor.js"></script>
 <?php include("../includes/footer.php") ?>
 <script src="../admin/js/blog.js"></script>

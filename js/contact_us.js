@@ -68,7 +68,6 @@ $(document).ready(function () {
                     answers: answers
                 },
                 success: function (data) {
-                    console.log(data)
                     try {
                         var data = $.parseJSON(data);
                         if (data.status == "1") {

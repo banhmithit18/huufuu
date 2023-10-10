@@ -9,6 +9,7 @@ require_once('../ultis/DBConnection.php');
 $_SESSION['project_detail'] = null;
 $_SESSION['project_name'] = null;
 
+getProjectName();
 @get();
 
 function getProjectName(){

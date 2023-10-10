@@ -151,7 +151,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
             $("#contact_answer_detail").empty();
             if (data.length > 0) {
               for (let i = 0; i < data.length; i++) {
-                console.log(data[i])
                 $("#contact_answer_detail").append(
                       '<div class="row contact_answer_row">'
                   +     '<div class="contact_question">'+data[i].contact_question_content+' </div>'

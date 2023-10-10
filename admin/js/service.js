@@ -1253,7 +1253,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         function: "save_detail",
       },
       success: function (data) {
-        console.log(data);
         try {
           data = JSON.parse(data);
         } catch (e) {

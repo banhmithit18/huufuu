@@ -560,7 +560,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 success: function (data) {
                     try {
                         data = $.parseJSON(data);
-                        console.log(data)
                         if (data != "") {
                             var dataTransfer = new DataTransfer();
                             let image_name = data[0].image_path.split("/");
@@ -996,7 +995,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
             success: function (data) {
                 $("#background_image_edit").val(null);
                 try {
-                    console.log(data)
                     data = JSON.parse(data);
                     if (data.status == "1") {
 

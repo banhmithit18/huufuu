@@ -532,7 +532,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         url: "../controllers/banner_controller.php",
         data: data,
         success: function (data) {
-            console.log(data)
           try {
             data = JSON.parse(data);
           } catch (e) {

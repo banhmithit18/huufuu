@@ -502,7 +502,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
               function: "delete_blog",
             },
             success: function (data) {
-              console.log(data);
               try {
                 data = JSON.parse(data);
               } catch (e) {

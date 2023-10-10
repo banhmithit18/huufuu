@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     $.ajax({
       type: "POST",
-      url: "../controllers/login.php",
+      url: "../admin/controllers/login.php",
       data: {
         function: "login",
         username: username,
@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         try {
           var data = $.parseJSON(data);
           if (data.status == "1") {
-            window.location.href = "../views/index.php";
+            window.location.href = "index";
           } else {
             $.alert({
               title: "Login failed!",

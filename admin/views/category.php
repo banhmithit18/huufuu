@@ -98,4 +98,4 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/category.js"></script>
+<script src="../admin/js/category.js"></script>

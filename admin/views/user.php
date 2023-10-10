@@ -211,7 +211,7 @@
 </main>
 
 <?php include("../includes/footer.php") ?>
-<script src="../js/user.js"></script>
+<script src="../admin/js/user.js"></script>
 <?php  
 if (isset($_SESSION['user_role'])) {
     $value = $_SESSION['user_role'];   

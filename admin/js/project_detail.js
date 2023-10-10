@@ -10,103 +10,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if (valueSelected == 'Select project') {
       return false;
     }
-    //get last priority 
-    getLastPriority(valueSelected);
-    try {
-      //remove old one
-      $("#table_project_detail").DataTable().destroy();
-      //init table
-      var t = $("#table_project_detail").DataTable({
-        ajax: {
-          url: "../controllers/project_controller.php?function=get_project_detail&project_id=" + valueSelected,
-          dataSrc: "",
-        },
-        rowId: "project_detail_id",
-        columns: [
-          { data: null },
-          {
-            data: "project_detail_type",
-            render: function (data, type, row, meta) {
-              if (data == "0") {
-                return "Text";
-              } else {
-                return "Image";
-              }
-            }
-
-          },
-          { data: "project_detail_priority" },
-          {
-            data: "project_detail_id",
-            className: "dt-body-center",
-            render: function (data, type, row, meta) {
-              if (row.project_detail_type == "1") {
-                return (
-                  "<button id=image_" +
-                  data +
-                  ' class="btn btn-sm btn-outline-success btn_edit">View</button>'
-                );
-              } else {
-                return "";
-              }
-            },
-          },
-          {
-            data: "project_detail_id",
-            className: "dt-body-center",
-            render: function (data, type, row, meta) {
-              if (row.project_detail_type == "0") {
-                return (
-                  "<button id=edit_" +
-                  data +
-                  ' class="btn btn-sm btn-outline-success btn_edit">View</button>'
-                );
-              } else {
-                return "";
-              }
-            },
-          },
-          {
-            data: "project_detail_status",
-            className: "dt-body-center",
-            render: function (data, type, row) {
-              if (data == "1") {
-                return '<span class="badge badge-success">Active</span>';
-              } else if (data == "0") {
-                return '<span class="badge badge-danger">Inactive</span>';
-              }
-            },
-          },
-          {
-            data: "project_detail_id",
-            className: "dt-body-center",
-            render: function (data, type, row) {
-              return (
-                "<button id=delete_" +
-                data +
-                ' class="btn btn-sm btn-outline-danger btn_delete">Delete</button>'
-              );
-            },
-          },
-        ],
-        columnDefs: [
-          {
-            searchable: false,
-            orderable: false,
-            targets: 0,
-          },
-        ],
-
-        order: [[1, "asc"]],
-        ordering: false,
-      });
-      t.on("order.dt search.dt", function () {
-        let i = 1;
-        t.column(0, { search: "applied", order: "applied" })
-          .nodes()
-          .each(function (cell, i) {
-            cell.innerHTML = i + 1;
-            t.cell(cell).invalidate("dom");
           });
       }).draw();
       $('#project-detail-content-wrapper').css("display", "flex")
@@ -170,7 +73,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //get project
   $.ajax({
     type: "POST",
-    url: "../controllers/project_controller.php",
+    url: "../admin/controllers/project_controller.php",
     data: {
       function: "get_list_project",
     },

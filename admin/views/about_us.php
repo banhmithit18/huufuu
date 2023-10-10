@@ -27,5 +27,5 @@
 
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <?php  include("../includes/footer.php") ?>
-<script src="../js/about_us_js.js"></script>
+<script src="../admin/js/about_us_js.js"></script>
 

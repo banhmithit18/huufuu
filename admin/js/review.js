@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //init table
   var t = $("#table_review").DataTable({
     ajax: {
-      url: "../controllers/review_controller.php?function=get_review",
+      url: "../admin/controllers/review_controller.php?function=get_review",
       dataSrc: "",
     },
     rowId: "contact_us_id",
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var review_id = data.review_id;
     var review_status = btn_type == "show" ? "1" : "0";
     $.ajax({
-      url: "../controllers/review_controller.php",
+      url: "../admin/controllers/review_controller.php",
       type: "POST",
       data: {
         function: "update_review",

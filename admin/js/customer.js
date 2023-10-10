@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/customer_controller.php",
+        url: "../admin/controllers/customer_controller.php",
         data: {
           function: "add_customer",
           customer_email: customer_email,
@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           var id = $("#edit_customer_id").val();
           $.ajax({
             type: "POST",
-            url: "../controllers/customer_controller.php",
+            url: "../admin/controllers/customer_controller.php",
             data: {
               function: "delete_customer",
               customer_id: id,
@@ -222,7 +222,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       //send ajax
       $.ajax({
         type: "POST",
-        url: "../controllers/customer_controller.php",
+        url: "../admin/controllers/customer_controller.php",
         data: {
           function: "update_customer",
           customer_id: customer_id,
@@ -273,7 +273,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   $.fn.dataTableExt.sErrMode = "none";
   var t = $("#table_customer").DataTable({
     ajax: {
-      url: "../controllers/customer_controller.php?function=get_customer",
+      url: "../admin/controllers/customer_controller.php?function=get_customer",
       dataSrc: function (data) {
         if (data.status == "0") {
           //alert confirm
@@ -285,7 +285,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             buttons: {
               OK: function () {
                 //href to index
-                window.location.href = "../index.php";
+                window.location.href = "../admin/index";
               },
               //try load the page
               "Try again": function () {

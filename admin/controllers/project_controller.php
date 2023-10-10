@@ -8,8 +8,8 @@ $PATH = '../../img/project_detail/';
 require_once('../ultis/DBConnection.php');
 require_once('../models/log.php');
 require_once('../models/project.php');
-
 require_once('../models/image.php');
+require_once('../models/project_detail.php');
 
 //get function from ajax
 $function = "";
@@ -17,16 +17,66 @@ if (isset($_REQUEST['function'])) {
     $function = $_REQUEST['function'];
 }
 
-//function get project detail
-
-if ($function == "update_project_detail") {
+if ($function == 'get_last_project_detail_priority') {
     $project_id = $_REQUEST['project_id'];
-    $content = $_REQUEST['content'];  
-    try {
-        $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', "w");
-        $content = urldecode($content);
-        fwrite($file, $content);
-        fclose($file);
+    $sql = "SELECT project_detail_priority FROM project_detail WHERE project_id = '$project_id' ORDER BY project_detail_priority DESC";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    if ($result != '') {
+        echo $result[0]['project_detail_priority'];
+    } else {
+        echo 1;
+    }
+}
+
+//function save project_detail
+if ($function == 'add_project_detail') {
+    //get data from ajax
+    $project_id = $_REQUEST['project_id'];
+    $text = $_REQUEST['project_detail_text'];
+    $type = $_REQUEST['project_detail_type'];
+    $priority =  $_REQUEST['project_detail_priority'];
+    $isActive =  $_REQUEST['project_detail_status'];
+    $isSameRow =  $_REQUEST['project_detail_isSameRow'];
+
+    //step 1 : add detail
+    $project_detail = new project_detail();
+    $project_detail->setProjectId($project_id);
+    $project_detail->setProjectDetailType($type);
+    $project_detail->setProjectDetailText($text);
+    $project_detail->setProjectDetailPriority($priority);
+    $project_detail->setProjectDetailStatus($isActive);
+    $project_detail->setProjectDetailIsSameRow($isSameRow);
+    $project_detail->setImageId(null);
+    $project_detail_id = 0;
+
+    $db = new DBConnection();
+    if ($db->Create($project_detail)) {
+        //check if type = 1 = iamge
+        if ($type == "1") {
+            $project_detail->setProjectDetailText("");
+            //get last id detail
+            $project_detail_id = $db->GetLastId("project_detail");
+            $image_id = null;
+            //step 2 : add image service
+            //get file
+            $file = $_FILES['project_detail_image'];
+            if ($file != null) {
+                $return = UploadImage($file, $project_detail_id, false);
+                if ($return['status'] == "1") {
+                    $image_id =  $return['image_id'];
+                }
+            } else {
+                $project_detail = new project_detail();
+                $project_detail->project_detail_id = $project_detail_id;
+                //delete service
+                $db->Delete($project_detail);
+                echo json_encode(array("status" => "0", "response" => "Image has not been uploaded successfully", "error" => $return['error']));
+                die();
+            }
+            $project_detail->setImageId($image_id);
+            $db->Update($project_detail, $project_detail_id);
+        }
         //uppdate project
         $sql = "SELECT * FROM project WHERE project_id = $project_id";
         $db = new DBConnection();
@@ -41,32 +91,125 @@ if ($function == "update_project_detail") {
         $project->category_id = $result[0]['category_id'];
         $project->hasDetail = 1;
         $db->Update($project, $project_id);
-        WriteLog("Update project detail", "Upadate project with id: $project_id");
-        $return_message = (array('status' => '1', 'response' => 'Content has been saved successfully', 'error' => ''));
-        echo json_encode($return_message);
-        die();
-    } catch (Exception $e) {
-        echo json_encode(array("status" => "0", "response" => "Content has not been saved successfully", "error" => $e->getMessage()));
-        die();
+
+        WriteLog("Add project detail", "add project detail with id = " . $project_detail_id);
+        echo json_encode(array("status" => "1", "response" => "Project detail has been added successfully"));
+    } else {
+        echo json_encode(array("status" => "0", "response" => "Project detail has not been saved successfully", "error" => $e->getMessage()));
     }
 }
 
-if ($function == "get_project_datail") {
-    $project_id = $_REQUEST['project_id'];
-    //create file if not exist
-    if (!file_exists($PATH . 'project_detail_' . $project_id . '.txt')) {
-        $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', 'w');
-        fclose($file);
+//delete
+if ($function == "delete_project_detail") {
+    ob_start();
+    //get data from ajax
+    $project_detail_id = $_REQUEST['project_detail_id'] == "" ? 0 : $_REQUEST['project_detail_id'];
+    $project_detail = new project_detail();
+    $project_detail->project_detail_id = $project_detail_id;
+    $db = new DBConnection();
+    if ($db->Delete($project_detail)) {
+        WriteLog("Delete project detail", "Deleted project detail with project_detail_id = " . $project_detail_id);
+        ob_end_clean();
+        echo json_encode(array("status" => "1", "response" => "Project detail has been deleted successfully"));
+    } else {
+        echo json_encode(array("status" => "0", "response" => "Project detail has not been deleted", "error" => $e->getMessage()));
     }
-    $content = "";
-    $file = fopen($PATH . 'project_detail_' . $project_id . '.txt', "r");
-    if (filesize($PATH . 'project_detail_' . $project_id . '.txt') > 0) {
-        $content = fread($file, filesize($PATH . 'project_detail_' . $project_id . '.txt'));
-    }
+}
 
-    fclose($file);
-    echo json_encode($content);
-    die();
+if ($function == "save_project_detail_text_edit") {
+    $project_detail_id = $_REQUEST['project_detail_id'] == "" ? 0 : $_REQUEST['project_detail_id'];
+    $project_detail_text_edit = $_REQUEST['project_detail_text'] == "" ? "" : $_REQUEST['project_detail_text'];
+
+    //get old data 
+    $sql = "SELECT * FROM project_detail WHERE project_detail_id = $project_detail_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+
+    $project_detail = new project_detail;
+    $project_detail->setProjectId($result[0]['project_id']);
+    $project_detail->setProjectDetailType($result[0]['project_detail_type']);
+    $project_detail->setProjectDetailText($project_detail_text_edit);
+    $project_detail->setImageId($result[0]['image_id']);
+    $project_detail->setProjectDetailPriority($result[0]['project_detail_priority']);
+    $project_detail->setProjectDetailStatus($result[0]['project_detail_status']);
+    $project_detail->setProjectDetailIsSameRow($result[0]['project_detail_isSameRow']);
+
+    //update project
+    if ($db->Update($project_detail, $project_detail_id)) {
+        WriteLog("Update project detail text ", "Change project text with id: $project_detail_id");
+        echo json_encode(array("status" => "1", "response" => "Project detail has been updated successfully", "error" => ""));
+    } else {
+        echo json_encode(array("status" => "0", "response" => "Project detail has not been updated successfully", "error" => "Cannot update project, please try again !"));
+    }
+}
+
+if ($function == "save_image_detail_edit") {
+    $project_detail_id = $_REQUEST['project_detail_id'] == "" ? 0 : $_REQUEST['project_detail_id'];
+    //get old data 
+    $sql = "SELECT * FROM project_detail WHERE project_detail_id = $project_detail_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+
+    $project_detail = new project_detail;
+    $project_detail->setProjectId($result[0]['project_id']);
+    $project_detail->setProjectDetailType($result[0]['project_detail_type']);
+    $project_detail->setProjectDetailText($result[0]['project_detail_text']);
+    $project_detail->setProjectDetailPriority($result[0]['project_detail_priority']);
+    $project_detail->setProjectDetailStatus($result[0]['project_detail_status']);
+    $project_detail->setProjectDetailIsSameRow($result[0]['project_detail_isSameRow']);
+
+    $image_id = 0;
+    //upload file to sv
+    $file = null;
+    if (isset($_FILES['project_detail_image'])) {
+        $file = $_FILES['project_detail_image'];
+    }
+    if ($file != null) {
+        $return = UploadImage($file, $project_detail_id, false);
+        if ($return['status'] == "1") {
+            $image_id = $return['image_id'];
+            //set image id to updated one
+            $project_detail->setImageId($image_id);
+            //update project
+            if ($db->Update($project_detail, $project_detail_id)) {
+                WriteLog("Update project detail image ", "Change project image with id: $project_detail_id");
+                echo json_encode(array("status" => "1", "response" => "Project detail has been updated successfully", "error" => ""));
+            } else {
+                echo json_encode(array("status" => "0", "response" => "Project detail has not been updated successfully", "error" => "Cannot update project, please try again !"));
+            }
+        } else {
+            echo json_encode(array("status" => "0", "response" => "Image has not been uploaded successfully", "error" => $return['error']));
+            die();
+        }
+    } else {
+        echo json_encode(array("status" => "0", "response" => "Project image is null", "error" => "Cannot update project, please try again !"));
+    }
+}
+
+if ($function == "get_project_detail") {
+    $project_id = $_REQUEST['project_id'];
+    $sql = "SELECT * FROM project_detail WHERE project_id = $project_id ORDER BY project_detail_priority DESC";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
+}
+
+if ($function == "get_project_detail_image") {
+    $project_detail_id = $_REQUEST['project_detail_id'];
+    $sql = "SELECT * FROM project_detail 
+            JOIN image ON project_detail.image_id = image.image_id
+            WHERE project_detail_id = $project_detail_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
+}
+
+if ($function == "get_project_detail_text") {
+    $project_detail_id = $_REQUEST['project_detail_id'];
+    $sql = "SELECT * FROM project_detail WHERE project_detail_id = $project_detail_id";
+    $db = new DBConnection();
+    $result = $db->Retrive($sql);
+    echo json_encode($result);
 }
 
 //function get all project
@@ -169,7 +312,7 @@ if ($function == "save_background_image_edit") {
         $file = $_FILES['project_background_image'];
     }
     if ($file != null) {
-        $return = UploadImage($file, $project_id);
+        $return = UploadImage($file, $project_id, true);
         if ($return['status'] == "1") {
             $image_id = $return['image_id'];
             //set image id to updated one
@@ -215,7 +358,7 @@ if ($function == "save_image_edit") {
     //upload file to sv
     $file = $_FILES['project_image_0'];
     if ($file != null) {
-        $return = UploadImage($file, $project_id);
+        $return = UploadImage($file, $project_id, true);
         if ($return['status'] == "1") {
             $image_id = $return['image_id'];
             //set image id to updated one
@@ -294,7 +437,7 @@ if ($function == "add_project") {
     }
 }
 
-function UploadImage($imgae, $project_id)
+function UploadImage($imgae, $project_id, $isResize)
 {
     $image_path = "../../img/project/";
     $file = $imgae;
@@ -313,20 +456,20 @@ function UploadImage($imgae, $project_id)
             move_uploaded_file($file_tmp, $file_destination);
             $path = $file_destination;
             //resize image
-            $resize_result = resize_image($path, IMAGE_WIDTH, IMAGE_HEIGHT, true);
-            if ("Success" != $resize_result) {
-                return array("image_id" => "", "status" => "0", "error" => "not a valid image type");
+            if ($isResize) {
+                $resize_result = resize_image($path, IMAGE_WIDTH, IMAGE_HEIGHT, true);
+                if ("Success" != $resize_result) {
+                    return array("image_id" => "", "status" => "0", "error" => "not a valid image type");
+                }
+                return array("image_id" => CreateImage($path), "status" => "1", "error" => "");
+            } else {
+                return array("image_id" => CreateImage($path), "status" => "1", "error" => "");
             }
-
-            return array("image_id" => CreateImage($path), "status" => "1", "error" => "");
         } else {
-            return array("image_id" => "", "status" => "0", "error" => "There was an error uploading your file");
+            return array("image_id" => "", "status" => "0", "error" => "You cannot upload files of this type");
         }
-    } else {
-        return array("image_id" => "", "status" => "0", "error" => "You cannot upload files of this type");
     }
 }
-
 function CreateImage($image_path)
 {
     $image = new Image();

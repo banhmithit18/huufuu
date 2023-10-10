@@ -1251,3 +1251,7 @@ text .nav-text-submenu {
   width: 25px;
   height: 25px;
 }
+.project_detail_image{
+  width: 100%;
+  height: 100%;
+}
